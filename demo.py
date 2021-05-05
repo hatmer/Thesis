@@ -4,11 +4,15 @@ Simulation: show impact of solution on data yield
 """
 from random import randint
 from time import sleep, time
+import sys
 
-DesiredQoS = .2 # 10% minimum required data yield
+DesiredQoS = .2 # 20% minimum required data yield
 OneRoundOfOpsTime = 1 # assume 1 seconds needed to sense and relay data for demo app
-mode = "no mitigation"
-
+OneRoundOfOpsEnergy = 1 # assume 1 unit of energy required per normal operation sequence
+HarvestableEnergyDuringAttack = .5 # units of energy per second harvestable during the attack
+mode = "mitigation"
+demoDuration = 60 # seconds
+delta = 2 # rate of fixed sleep time decrease
 
 """ Demo Appliction: makes API calls to collect and send data """
 class Application:
@@ -25,16 +29,21 @@ class Application:
     def run(self):
         self.normalOps()
 
+        # simulate periodic attack occuring
         if mode == "mitigation":
-            if self.mitigator.power == "run" and randint(1,5) == 1: # simulate random attack occuring
+            if self.mitigator.power == "run" and int(time()) % 10 == 0: # randint(1,5) == 1:
                 print("Attack detected!")
-                simulatedAttackEnd = time() + randint(1, 30)
+                simulatedAttackEnd = time() + 12 # randint(1, 30)
                 while time() < simulatedAttackEnd:
+                    # enter low power state
                     self.mitigator.doze()
+
                     print("waking for {} seconds".format(self.mitigator.waketime))
                     begin = time()
                     while time() < begin + self.mitigator.waketime:
                         self.normalOps()
+                        # simulated expenditure of energy
+                        self.mitigator.energy -= OneRoundOfOpsEnergy
                     
                 print("Attack is over, resuming normal operations")
 
@@ -42,38 +51,63 @@ class Application:
 """ Attack Mitigation system """
 class Mitigator:
     def __init__(self, drivers):
-        self.wakelocks = [0]*len(drivers) # one wakelock per corruptible driver
         self.network = drivers[0]
         self.sensor = drivers[1]
         self.power = "run" # run / suspend
+        self.buf = []  # buffer for unsent messages
+        self.energy = 100 # start with full energy
+        self.energyLastRound = 100 # placeholder value
 
         # calculate sleep and wake time. Assuming that waking ops in one chunk is same QoS as multiple smaller wakeups
-        self.sleeptime = ((1-DesiredQoS) * 10) * OneRoundOfOpsTime  # how long to sleep before waking up
+        self.baselineSleepTime = ((1-DesiredQoS) * 10) * OneRoundOfOpsTime # pessimistic starting assumption
+        self.sleeptime = self.baselineSleepTime
         self.waketime = DesiredQoS * 10 * OneRoundOfOpsTime
-    
-    def send(self, data):
-        if self.power == "run":
-            self.wakelocks[0] = 1
-            ret = self.network.send(data)
-            self.wakelocks[0] = 0
-            return ret
 
+    # wrapper for network driver
+    def send(self, data):
+
+        if self.power == "run":
+            if len(self.buf):
+                for entry in self.buf:
+                    self.network.send(buf)
+            self.network.send(data)
+        else:
+            self.buf.append(data)
+
+        return "send ok"
+        
+
+    # wrapper for sensor driver
     def sense(self):
         if self.power == "run":
-            self.wakelocks[1] = 1
             data = self.sensor.sense()
-            self.wakelocks[1] = 0
             return data
+        else:
+            return None
 
     def doze(self):
-        print("dozing for {} seconds".format(self.sleeptime))
         self.power = "suspend"
-        # wait until no peripherals hold a wakelock
-        while sum(self.wakelocks) != 0:
-            print("waiting for peripheral operations to complete. Wakelocks: [{}, {}]".format(self.wakelocks[0], self.wakelocks[1]))
+        print("energy is {}".format(self.energy))
+        print("sleeptime is {}".format(self.sleeptime))
 
-        # sleep for 90% of the time
+        # determine sleeptime based on power
+        # 1. determine if new power has arrived
+        #    -> if so, be more optimistic about estimate
+        # if we have 10 units of energy remaining, of which two arrived during sleep, and 1 second of ops on average takes 1 unit of energy
+        #  -> if rate of new energy is greater than use per second, then attack is not an attack, just run as normal
+        #  -> if rate of new energy is less than use per second, then we still ration energy usage, depends only on amt stored, since attack could theoretically continue forever
+        # aim for new energy being equal to amount used: try to keep stored energy at starting level or higher
+        # if energy is dropping, provide minimal required QoS
+        # otherwise, provide slightly higher QoS each round until starts dropping
+        if self.energy < self.energyLastRound and self.sleeptime > self.baselineSleepTime:
+            self.sleeptime +=  ((self.sleeptime - self.baselineSleepTime) / 2) # almost exponential back-off
+        elif self.energy > self.energyLastRound: # energy spent was less than energy harvested
+            self.sleeptime -= delta # fixed decrease
+       
+        print("dozing for {} seconds".format(self.sleeptime))
         sleep(self.sleeptime)
+        # simulated harvesting of energy during sleep
+        self.energy += self.sleeptime * HarvestableEnergyDuringAttack
         self.power = "run"
 
 
@@ -106,13 +140,16 @@ class Sensor:
 
 # Assumption: the application doesn't make more API requests while waiting for others to complete
 
-Network = Network()
-Sensor = Sensor()
-Mitigator = Mitigator([Network,Sensor])
-App = Application(Mitigator)
+if __name__ == "__main__":
+    Network = Network()
+    Sensor = Sensor()
+    Mitigator = Mitigator([Network,Sensor])
+    App = Application(Mitigator)
 
-while True:
-    App.run()
+
+    startTime = time()
+    while time() < startTime + demoDuration:
+        App.run()
 
 
 
