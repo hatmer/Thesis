@@ -47,7 +47,7 @@ class Application:
         # simulate periodic attack occuring
         if mode == "mitigation":
             if self.mitigator.power == "run" and int(time()-self.starttime) % attackFrequency == 0: # randint(1,5) == 1:
-                print("Attack detected!")
+                dprint("Attack detected!")
                 self.numAttacks += 1
                 simulatedAttackEnd = time() + attackDuration # randint(1, 30)
                 self.mitigator.sleeptime = self.mitigator.baselineSleepTime # reset at beginning of each attack
@@ -60,11 +60,11 @@ class Application:
                     while time() < begin + self.mitigator.waketime:
                         self.normalOps()
                     
-                print("Attack is over, resuming normal operations")
+                dprint("Attack is over, resuming normal operations")
 
         # normal energy supply
         self.mitigator.updateEnergy(normalEnergyCollectedPerRound)
-        print("number of attacks: {}".format(self.numAttacks))
+        dprint("number of attacks: {}".format(self.numAttacks))
 
 
 
@@ -131,11 +131,14 @@ class Mitigator:
         # if energy is dropping, provide minimal required QoS
         # otherwise, provide slightly higher QoS each round until starts dropping
         if self.energy < self.energyLastRound and self.sleeptime < self.baselineSleepTime:
-            print("increasing sleep time to conserve energy")
-            self.sleeptime += ((self.sleeptime - self.baselineSleepTime) / 2) # almost exponential back-off
+            dprint("increasing sleep time to conserve energy")
+            self.sleeptime += (max((self.sleeptime - self.baselineSleepTime) / 2),0) # almost exponential back-off
         elif self.energy > self.energyLastRound: # energy spent was less than energy harvested
-            print("decreasing sleep time to improve QoS")
-            self.sleeptime -= delta # fixed decrease
+            dprint("decreasing sleep time to improve QoS")
+            if self.sleeptime - delta < 0:
+                self.sleeptime = 0
+            else:
+                self.sleeptime -= delta # fixed decrease
        
         print("dozing for {} seconds".format(self.sleeptime))
         sleep(self.sleeptime)
