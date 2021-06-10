@@ -13,6 +13,22 @@
 
 /* Tune this value: amount for additive increase */
 #define DELTA 2 
+/* Tune this value: amount of space in buffer */
+#define BUFFERSIZE 32
+
+struct State {
+  double wakePercent;             // wakePercent >= QoS
+  double energy;                  // used to measure how much energy is harvested during an attack
+};
+
+struct Buffer {
+  void* buffer[BUFFERSIZE];       // only used by network device
+  int bufferHead = 0;             // points to head of ring buffer
+  int bufferTail = 0;             // points to tail of ring buffer
+};
+
+struct State state;
+struct Buffer ring;
 
 /**
  * Proceedures
@@ -36,6 +52,7 @@ get_time()
 
 /*
  * Get the energy percentage from the energy buffer
+ * TODO implement
  *
  */
 static double
@@ -49,22 +66,22 @@ get_energy()
  *
  */
 static bool
-should_be_awake(*vars)
+should_be_awake(struct *userVars)
 {
-  return !vars.attack || (get_time() % 10) < vars.wakePercent* 10;
+  return !userVas.attack || (get_time() % 10) < state.wakePercent* 10;
 }
 
 /**
  * Wrap a network device
  */
 static int
-send_wrapper(int (*send)(*vars, id, **args))
+send_wrapper(int (*send)(*userVars, **args))
 {
   // send everything in buffer first
-  while (should_be_awake(vars)) {
-    if (vars.bufferHead != vars.bufferTail) {
-      send(vars->buffer[vars.bufferHead]);
-      vars.bufferHead += 1;
+  while (should_be_awake(userVars)) {
+    if (ring.bufferHead != ring.bufferTail) {
+      send(ring.buffer[ring.bufferHead]);
+      ring.bufferHead += 1;
     }
   }
   // handle message
@@ -72,13 +89,12 @@ send_wrapper(int (*send)(*vars, id, **args))
     send(args->message);
   } else {
     // check if buffer is full
-    if (vars.bufferTail+1 % sizeof(vars->buffer)/sizeof(vars->buffer[0])) {
+    if (ring.bufferTail+1 % sizeof(ring->buffer)/sizeof(ring->buffer[0])) {
       return -1; // error code here
     }
-    vars->buffer[vars.bufferTail] = args->message;
-    vars.bufferTail += 1;
+    ring->buffer[ring.bufferTail] = args->message;
+    ring.bufferTail += 1;
   }
-
   return 0;
 }
 
@@ -87,9 +103,9 @@ send_wrapper(int (*send)(*vars, id, **args))
  * Wrap a sensor device
  */
 static void*
-sense_wrapper(void* (*sense)(*vars, id, **args))
+sense_wrapper(void* (*sense)(*vars, **args))
 {
-  if (should_be_awake(vars)) {
+  if (should_be_awake(userVars)) {
       void* dataPtr = sense();
   } else {
     return (void*) -1; // error code here
@@ -103,18 +119,17 @@ sense_wrapper(void* (*sense)(*vars, id, **args))
 static void
 AIMD(*vars)
 {
-  double energyNow = get_energy();
-  double energyConsumed = vars.energy - energyNow;
+  double energyConsumed = state.energy - get_energy();
   if (energyConsumed < 0) { // gained energy: increase wakePercent
-    if (vars.wakePercent + DELTA <= 100) {
-      vars.wakePercent += DELTA; 
+    if (state.wakePercent + DELTA <= 100) {
+      state.wakePercent += DELTA; 
     } else{
-      vars.wakePercent = 100;
+      state.wakePercent = 100;
     }
   } else { // lost energy: decrease wakePercent, with minimum wakePercent = vars.QoS
-    vars.wakePercent /= 2;
-    if (vars.wakePercent < vars.QoS) {
-      vars.wakePercent = vars.QoS;
+    state.wakePercent /= 2;
+    if (state.wakePercent < userVars.QoS) {
+      state.wakePercent = userVars.QoS;
     }
   }
   return;
