@@ -11,10 +11,8 @@
 #include <stdio.h>
 #include <string.h>
 
-/* Size of the matrices to multiply */
-#define SIZE 1000
-
-struct 
+/* Tune this value: amount for additive increase */
+#define DELTA 2 
 
 /**
  * Proceedures
@@ -46,42 +44,80 @@ get_energy()
   return 100;
 }
 
+/*
+ * Determine if device should be in wake mode
+ *
+ */
+static bool
+should_be_awake(*vars)
+{
+  return !vars.attack || (get_time() % 10) < vars.wakePercent* 10;
+}
+
 /**
  * Wrap a network device
  */
-static void
-send_wrapper()
+static int
+send_wrapper(int (*send)(*vars, id, **args))
 {
-        int i, j;
+  // send everything in buffer first
+  while (should_be_awake(vars)) {
+    if (vars.bufferHead != vars.bufferTail) {
+      send(vars->buffer[vars.bufferHead]);
+      vars.bufferHead += 1;
+    }
+  }
+  // handle message
+  if (should_be_awake(vars)) {
+    send(args->message);
+  } else {
+    // check if buffer is full
+    if (vars.bufferTail+1 % sizeof(vars->buffer)/sizeof(vars->buffer[0])) {
+      return -1; // error code here
+    }
+    vars->buffer[vars.bufferTail] = args->message;
+    vars.bufferTail += 1;
+  }
 
-        for (i = 0; i < SIZE; i++) {
-                for (j = 0; j < SIZE; j++) {
-                        mat_a[i][j] = ((i + j) & 0x0F) * 0x1P-4;
-                        mat_b[i][j] = (((i << 1) + (j >> 1)) & 0x0F) * 0x1P-4;
-                }
-        }
-
-        memset(mat_c, 0, sizeof(mat_c));
-        memset(mat_ref, 0, sizeof(mat_ref));
+  return 0;
 }
+
 
 /* 
  * Wrap a sensor device
  */
-static void
-sense_wrapper()
+static void*
+sense_wrapper(void* (*sense)(*vars, id, **args))
 {
-
-  return 0;
+  if (should_be_awake(vars)) {
+      void* dataPtr = sense();
+  } else {
+    return (void*) -1; // error code here
+  }
+  return dataPtr;
 }
 
 /*
- * Update QoS (waketime)
+ * Update QoS (wakePercent)
  */
 static void
-AIMD(*)
+AIMD(*vars)
 {
-  return 0;
+  double energyNow = get_energy();
+  double energyConsumed = vars.energy - energyNow;
+  if (energyConsumed < 0) { // gained energy: increase wakePercent
+    if (vars.wakePercent + DELTA <= 100) {
+      vars.wakePercent += DELTA; 
+    } else{
+      vars.wakePercent = 100;
+    }
+  } else { // lost energy: decrease wakePercent, with minimum wakePercent = vars.QoS
+    vars.wakePercent /= 2;
+    if (vars.wakePercent < vars.QoS) {
+      vars.wakePercent = vars.QoS;
+    }
+  }
+  return;
 }
 
 int
