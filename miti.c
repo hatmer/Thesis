@@ -68,14 +68,14 @@ get_energy()
 static bool
 should_be_awake(struct *userVars)
 {
-  return !userVas.attack || (get_time() % 10) < state.wakePercent* 10;
+  return !userVars.attack || (get_time() % 10) < state.wakePercent* 10;
 }
 
 /**
  * Wrap a network device
  */
 static int
-send_wrapper(int (*send)(*userVars, **args))
+send_wrapper(int (*send)(struct *userVars, void **args))
 {
   // send everything in buffer first
   while (should_be_awake(userVars)) {
@@ -98,12 +98,11 @@ send_wrapper(int (*send)(*userVars, **args))
   return 0;
 }
 
-
 /* 
  * Wrap a sensor device
  */
 static void*
-sense_wrapper(void* (*sense)(*vars, **args))
+sense_wrapper(void* (*sense)(struct *vars, **args))
 {
   if (should_be_awake(userVars)) {
       void* dataPtr = sense();
@@ -140,4 +139,3 @@ main(int argc, char *argv[])
 {
         return 0;
 }
-

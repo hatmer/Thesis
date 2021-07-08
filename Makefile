@@ -1,9 +1,5 @@
-CC=gcc
-CFLAGS:=-Werror -O3 -g $(CFLAGS)
+CONTIKI_PROJECT = udp-client udp-server
+all: $(CONTIKI_PROJECT)
 
-all: miti
-
-multiply: muti.o
-
-clean:	
-	rm -f muti *.o
+CONTIKI=../..
+include $(CONTIKI)/Makefile.include
