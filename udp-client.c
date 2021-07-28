@@ -3,9 +3,10 @@
 #include "random.h"
 #include "net/netstack.h"
 #include "net/ipv6/simple-udp.h"
-#include "miti.h"
+#include "./miti.h"
 
 #include "sys/log.h"
+
 #define LOG_MODULE "App"
 #define LOG_LEVEL LOG_LEVEL_INFO
 
@@ -67,8 +68,7 @@ PROCESS_THREAD(udp_client_process, ev, data)
       LOG_INFO_6ADDR(&dest_ipaddr);
       LOG_INFO_("\n");
       snprintf(str, sizeof(str), "hello %d", count);
-      void* args = { &udp_conn, str, strlen(str), &dest_ipaddr };
-      send_wrapper(&simple_udp_sendto, miti_vars, args);
+      send_wrapper(simple_udp_sendto, &udp_conn, str, strlen(str), &dest_ipaddr, &miti_vars);
       count++;
     } else {
       LOG_INFO("Not reachable yet\n");

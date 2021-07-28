@@ -74,8 +74,8 @@ should_be_awake(struct *userVars)
 /**
  * Wrap a network device
  */
-static int
-send_wrapper(int (*send)(struct *userVars, void **args))
+int
+send_wrapper(int (*send)(struct simple_udp_connection*, const void*, uint16_t, const uip_ipaddr_t*), struct simple_udp_connection* udp_conn, const void* str, uint16_t length, const uip_ipaddr_t*dest_ipaddr, struct *userVars)
 {
   // send everything in buffer first
   while (should_be_awake(userVars)) {
@@ -86,7 +86,7 @@ send_wrapper(int (*send)(struct *userVars, void **args))
   }
   // handle message
   if (should_be_awake(vars)) {
-    send(args->message);
+    send(udp_conn, str, length, dest_ipaddr );
   } else {
     // check if buffer is full
     if (ring.bufferTail+1 % sizeof(ring->buffer)/sizeof(ring->buffer[0])) {
