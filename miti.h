@@ -15,7 +15,7 @@ struct Miti {
   double QoS;
 } miti;
 
-int send_wrapper(int (*send)(simple_udp_connection**, const void*, uint16_t, const uip_ipaddr_t*),  simple_udp_connection** udp_conn, const void* str, uint16_t length, const uip_ipaddr_t *dest_ipaddr, Miti* userVars);
+int send_wrapper(int (*send)(simple_udp_connection*, const void*, uint16_t, const uip_ipaddr_t*),  simple_udp_connection* udp_conn, const void* str, uint16_t length, const uip_ipaddr_t *dest_ipaddr, Miti* userVars);
 //static int sense_wrapper(int (*send)(struct Miti *userVars, void **args));
 
 #endif // MITI_H_
