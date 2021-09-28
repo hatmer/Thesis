@@ -5,13 +5,16 @@
  *
  */
 
-//#include <unistd.h>
-//#include <sys/time.h>
-//#include <time.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "miti.h"
+#include "sys/log.h"
+#include "netstack.h"
+
+#define LOG_MODULE "App"
+#define LOG_LEVEL LOG_LEVEL_INFO
 //#include "net/ipv6/simple-udp.h"
 
 //typedef struct simple_udp_connection simple_udp_connection
@@ -58,7 +61,7 @@ static int
 get_time()
 {
   int time = (int)clock_seconds();
-  printf("%d", time);
+  LOG_INFO("get_time: %d\n", time);
    return time;
 }
 
@@ -67,22 +70,54 @@ get_time()
  * TODO implement
  *
  */
-/*
+
 static double
 get_energy()
 {
   return 100;
-}*/
+}
 
 /*
  * Determine if device should be in wake mode
  *
  */
-static int
-should_be_awake(struct Miti *userVars)
+static void
+conserve_energy(struct Miti *userVars)
 {
-  return /*!userVars->attack ||*/ (get_time() % 10 < state.wakePercent * 10);
+  LOG_INFO("checking if should be asleep\n");
+  int t = get_time() % 10;
+  if ( /*userVars->attack && */ (t > (state.wakePercent) * 10))
+  {
+    NETSTACK_RADIO.off();
+    sleep(10 - t);  // sleep until next wake period
+    NETSTACK_RADIO.on();
+  }
+
 }
+
+/*
+ * Update QoS (wakePercent)
+ */
+
+static void
+AIMD(struct Miti *userVars)
+{
+  double energyConsumed = state.energy - get_energy();
+  if (energyConsumed < 0) { // gained energy: increase wakePercent
+    if (state.wakePercent + DELTA <= 1.0) {
+      state.wakePercent += DELTA;
+    } else{
+      state.wakePercent = 1.0;
+    }
+  } else { // lost energy: decrease wakePercent, with minimum wakePercent = vars.QoS
+    state.wakePercent /= 2;
+    if (state.wakePercent < userVars->QoS) {
+      state.wakePercent = userVars->QoS;
+    }
+  }
+  return;
+}
+
 
 /**
  * Wrap a network device
@@ -90,25 +125,15 @@ should_be_awake(struct Miti *userVars)
 int
 send_wrapper(int (*send)(simple_udp_connection*, const void*, uint16_t, const uip_ipaddr_t*), simple_udp_connection* udp_conn, const void* str, uint16_t length, const uip_ipaddr_t*dest_ipaddr, Miti *userVars)
 {
-  // send everything in buffer first
-  while (should_be_awake(userVars)) {
-    if (ring.bufferHead != ring.bufferTail) { // TODO double-check that ring buffer works correctly
-      send(udp_conn, ring.buffer[ring.bufferHead], length, dest_ipaddr ); // TODO must store correct length somewhere
-      ring.bufferHead += 1;
-    }
-  }
-  // handle message
-  if (should_be_awake(userVars)) {
-    send(udp_conn, str, length, dest_ipaddr );
-  } else {
-    // check if buffer is full
-    if (ring.bufferTail+1 % sizeof(ring.buffer)/sizeof(ring.buffer[0])) {
-      return -1; // error code here
-    }
-    
-    ring.buffer[ring.bufferTail] = str; // pointer to string
-    ring.bufferTail += 1;
-  }
+  // 1. sleep mode
+  conserve_energy(userVars);
+
+  // 2. wake mode
+  send(udp_conn, str, length, dest_ipaddr);
+
+  // 3. AIMD adjustment to state.wakePercent
+  AIMD(userVars);
+
   return 0;
 }
 
@@ -127,26 +152,3 @@ sense_wrapper(void* (*sense)(struct *vars, **args))
   return dataPtr;
 }
 */
-
-/*
- * Update QoS (wakePercent)
- */
-/*
-static void
-AIMD(struct Miti *userVars)
-{
-  double energyConsumed = state.energy - get_energy();
-  if (energyConsumed < 0) { // gained energy: increase wakePercent
-    if (state.wakePercent + DELTA <= 100) {
-      state.wakePercent += DELTA; 
-    } else{
-      state.wakePercent = 100;
-    }
-  } else { // lost energy: decrease wakePercent, with minimum wakePercent = vars.QoS
-    state.wakePercent /= 2;
-    if (state.wakePercent < userVars->QoS) {
-      state.wakePercent = userVars->QoS;
-    }
-  }
-  return;
-}*/

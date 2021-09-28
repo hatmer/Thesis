@@ -1,0 +1,1030 @@
+# Path: build/native/udp-server.native
+# Arch: x86_64
+# Object files:
+[  0] linker synthesized
+[  1] udp-server.o
+[  2] build/native/obj/miti.o
+[  3] build/native/contiki-ng-native.a(platform.o)
+[  4] build/native/contiki-ng-native.a(clock.o)
+[  5] build/native/contiki-ng-native.a(buttons.o)
+[  6] build/native/contiki-ng-native.a(tun6-net.o)
+[  7] build/native/contiki-ng-native.a(rtimer-arch.o)
+[  8] build/native/contiki-ng-native.a(watchdog.o)
+[  9] build/native/contiki-ng-native.a(int-master.o)
+[ 10] build/native/contiki-ng-native.a(gpio-hal-arch.o)
+[ 11] build/native/contiki-ng-native.a(contiki-main.o)
+[ 12] build/native/contiki-ng-native.a(autostart.o)
+[ 13] build/native/contiki-ng-native.a(ctimer.o)
+[ 14] build/native/contiki-ng-native.a(energest.o)
+[ 15] build/native/contiki-ng-native.a(etimer.o)
+[ 16] build/native/contiki-ng-native.a(log.o)
+[ 17] build/native/contiki-ng-native.a(node-id.o)
+[ 18] build/native/contiki-ng-native.a(process.o)
+[ 19] build/native/contiki-ng-native.a(rtimer.o)
+[ 20] build/native/contiki-ng-native.a(stimer.o)
+[ 21] build/native/contiki-ng-native.a(timer.o)
+[ 22] build/native/contiki-ng-native.a(list.o)
+[ 23] build/native/contiki-ng-native.a(memb.o)
+[ 24] build/native/contiki-ng-native.a(random.o)
+[ 25] build/native/contiki-ng-native.a(ringbuf.o)
+[ 26] build/native/contiki-ng-native.a(button-hal.o)
+[ 27] build/native/contiki-ng-native.a(gpio-hal.o)
+[ 28] build/native/contiki-ng-native.a(leds.o)
+[ 29] build/native/contiki-ng-native.a(nullradio.o)
+[ 30] build/native/contiki-ng-native.a(serial-line.o)
+[ 31] build/native/contiki-ng-native.a(link-stats.o)
+[ 32] build/native/contiki-ng-native.a(linkaddr.o)
+[ 33] build/native/contiki-ng-native.a(nbr-table.o)
+[ 34] build/native/contiki-ng-native.a(netstack.o)
+[ 35] build/native/contiki-ng-native.a(packetbuf.o)
+[ 36] build/native/contiki-ng-native.a(queuebuf.o)
+[ 37] build/native/contiki-ng-native.a(nullmac.o)
+[ 38] build/native/contiki-ng-native.a(simple-udp.o)
+[ 39] build/native/contiki-ng-native.a(tcpip.o)
+[ 40] build/native/contiki-ng-native.a(uip-ds6-nbr.o)
+[ 41] build/native/contiki-ng-native.a(uip-ds6-route.o)
+[ 42] build/native/contiki-ng-native.a(uip-ds6.o)
+[ 43] build/native/contiki-ng-native.a(uip-icmp6.o)
+[ 44] build/native/contiki-ng-native.a(uip-nd6.o)
+[ 45] build/native/contiki-ng-native.a(uip-packetqueue.o)
+[ 46] build/native/contiki-ng-native.a(uip-sr.o)
+[ 47] build/native/contiki-ng-native.a(uip-udp-packet.o)
+[ 48] build/native/contiki-ng-native.a(uip6.o)
+[ 49] build/native/contiki-ng-native.a(uipbuf.o)
+[ 50] build/native/contiki-ng-native.a(uiplib.o)
+[ 51] build/native/contiki-ng-native.a(rpl-dag-root.o)
+[ 52] build/native/contiki-ng-native.a(rpl-dag.o)
+[ 53] build/native/contiki-ng-native.a(rpl-ext-header.o)
+[ 54] build/native/contiki-ng-native.a(rpl-icmp6.o)
+[ 55] build/native/contiki-ng-native.a(rpl-mrhof.o)
+[ 56] build/native/contiki-ng-native.a(rpl-nbr-policy.o)
+[ 57] build/native/contiki-ng-native.a(rpl-neighbor.o)
+[ 58] build/native/contiki-ng-native.a(rpl-timers.o)
+[ 59] build/native/contiki-ng-native.a(rpl.o)
+[ 60] /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/libSystem.tbd
+# Sections:
+# Address	Size    	Segment	Section
+0x100000B20	0x0000F7A5	__TEXT	__text
+0x1000102C6	0x000000D2	__TEXT	__stubs
+0x100010398	0x0000016E	__TEXT	__stub_helper
+0x100010506	0x000005BF	__TEXT	__cstring
+0x100010AD0	0x00000138	__TEXT	__const
+0x100010C08	0x000003F4	__TEXT	__unwind_info
+0x100011000	0x00000190	__DATA_CONST	__got
+0x100011190	0x000001E8	__DATA_CONST	__const
+0x100012000	0x00000118	__DATA	__la_symbol_ptr
+0x100012120	0x00000438	__DATA	__data
+0x100012560	0x0000D771	__DATA	__bss
+0x10001FCE0	0x00000BC0	__DATA	__common
+# Symbols:
+# Address	Size    	File  Name
+0x100000B20	0x00000050	[  1] _process_thread_udp_server_process
+0x100000B70	0x000000A1	[  1] _udp_rx_callback
+0x100000C20	0x00000020	[  2] _init
+0x100000C40	0x00000155	[  2] _send_wrapper
+0x100000DA0	0x000000E0	[  3] _select_set_callback
+0x100000E80	0x00000010	[  3] _native_uart_set_input
+0x100000E90	0x00000020	[  3] _platform_process_args
+0x100000EB0	0x00000020	[  3] _platform_init_stage_one
+0x100000ED0	0x00000050	[  3] _platform_init_stage_two
+0x100000F20	0x000000E0	[  3] _platform_init_stage_three
+0x100001000	0x000001D0	[  3] _platform_main_loop
+0x1000011D0	0x00000030	[  3] _log_message
+0x100001200	0x00000020	[  3] _uip_log
+0x100001220	0x00000040	[  3] _stdin_set_fd
+0x100001260	0x0000004E	[  3] _stdin_handle_fd
+0x1000012B0	0x00000050	[  4] _clock_time
+0x100001300	0x00000020	[  4] _clock_seconds
+0x100001320	0x00000010	[  4] _clock_delay
+0x100001330	0x00000006	[  4] _clock_init
+0x100001340	0x00000010	[  6] _input
+0x100001350	0x00000050	[  6] _output
+0x1000013A0	0x00000170	[  6] _tun_init
+0x100001510	0x00000050	[  6] _cleanup
+0x100001560	0x00000030	[  6] _sigcleanup
+0x100001590	0x00000060	[  6] _set_fd
+0x1000015F0	0x00000090	[  6] _handle_fd
+0x100001680	0x00000110	[  6] _ssystem
+0x100001790	0x00000020	[  7] _rtimer_arch_init
+0x1000017B0	0x00000020	[  7] _interrupt
+0x1000017D0	0x00000055	[  7] _rtimer_arch_schedule
+0x100001830	0x00000010	[  8] _watchdog_init
+0x100001840	0x00000010	[  8] _watchdog_start
+0x100001850	0x00000010	[  8] _watchdog_periodic
+0x100001860	0x00000010	[  8] _watchdog_stop
+0x100001870	0x0000000E	[  8] _watchdog_reboot
+0x100001880	0x00000010	[  9] _int_master_enable
+0x100001890	0x00000020	[  9] _int_master_read_and_disable
+0x1000018B0	0x00000010	[  9] _int_master_status_set
+0x1000018C0	0x00000010	[  9] _int_master_is_enabled
+0x1000018D0	0x00000010	[ 10] _gpio_hal_arch_init
+0x1000018E0	0x00000010	[ 10] _gpio_hal_arch_no_port_interrupt_enable
+0x1000018F0	0x00000010	[ 10] _gpio_hal_arch_no_port_interrupt_disable
+0x100001900	0x00000020	[ 10] _gpio_hal_arch_no_port_pin_cfg_set
+0x100001920	0x00000020	[ 10] _gpio_hal_arch_no_port_pin_cfg_get
+0x100001940	0x00000010	[ 10] _gpio_hal_arch_no_port_pin_set_input
+0x100001950	0x00000010	[ 10] _gpio_hal_arch_no_port_pin_set_output
+0x100001960	0x00000020	[ 10] _gpio_hal_arch_no_port_set_pin
+0x100001980	0x00000020	[ 10] _gpio_hal_arch_no_port_clear_pin
+0x1000019A0	0x00000030	[ 10] _gpio_hal_arch_no_port_read_pin
+0x1000019D0	0x00000020	[ 10] _gpio_hal_arch_no_port_write_pin
+0x1000019F0	0x000003D0	[ 10] _gpio_hal_arch_no_port_set_pins
+0x100001DC0	0x000003D0	[ 10] _gpio_hal_arch_no_port_clear_pins
+0x100002190	0x00000110	[ 10] _gpio_hal_arch_no_port_read_pins
+0x1000022A0	0x00000298	[ 10] _gpio_hal_arch_no_port_write_pins
+0x100002540	0x000002ED	[ 11] _main
+0x100002830	0x00000040	[ 12] _autostart_start
+0x100002870	0x00000038	[ 12] _autostart_exit
+0x1000028B0	0x00000110	[ 13] _process_thread_ctimer_process
+0x1000029C0	0x00000030	[ 13] _ctimer_init
+0x1000029F0	0x00000070	[ 13] _ctimer_set
+0x100002A60	0x00000070	[ 13] _ctimer_set_with_process
+0x100002AD0	0x00000050	[ 13] _ctimer_reset
+0x100002B20	0x00000050	[ 13] _ctimer_restart
+0x100002B70	0x00000050	[ 13] _ctimer_stop
+0x100002BC0	0x00000058	[ 13] _ctimer_expired
+0x100002C20	0x00000010	[ 14] _energest_init
+0x100002C30	0x00000010	[ 14] _energest_flush
+0x100002C40	0x00000008	[ 14] _energest_get_total_time
+0x100002C50	0x000001C0	[ 15] _process_thread_etimer_process
+0x100002E10	0x00000020	[ 15] _etimer_request_poll
+0x100002E30	0x00000130	[ 15] _etimer_set
+0x100002F60	0x00000140	[ 15] _etimer_reset_with_new_interval
+0x1000030A0	0x00000130	[ 15] _etimer_reset
+0x1000031D0	0x00000130	[ 15] _etimer_restart
+0x100003300	0x00000070	[ 15] _etimer_adjust
+0x100003370	0x00000010	[ 15] _etimer_expired
+0x100003380	0x00000010	[ 15] _etimer_expiration_time
+0x100003390	0x00000010	[ 15] _etimer_start_time
+0x1000033A0	0x00000020	[ 15] _etimer_pending
+0x1000033C0	0x00000020	[ 15] _etimer_next_expiration_time
+0x1000033E0	0x00000102	[ 15] _etimer_stop
+0x1000034F0	0x00000060	[ 16] _log_6addr
+0x100003550	0x00000080	[ 16] _log_6addr_compact_snprint
+0x1000035D0	0x000000C0	[ 16] _log_6addr_compact
+0x100003690	0x000000C0	[ 16] _log_lladdr
+0x100003750	0x00000060	[ 16] _log_lladdr_compact
+0x1000037B0	0x00000040	[ 16] _log_bytes
+0x1000037F0	0x00000080	[ 16] _log_set_level
+0x100003870	0x00000060	[ 16] _log_get_level
+0x1000038D0	0x00000021	[ 16] _log_level_to_str
+0x100003900	0x0000001C	[ 17] _node_id_init
+0x100003920	0x00000020	[ 18] _process_alloc_event
+0x100003940	0x00000050	[ 18] _process_start
+0x100003990	0x00000110	[ 18] _process_post_synch
+0x100003AA0	0x00000120	[ 18] _process_exit
+0x100003BC0	0x000000E0	[ 18] _exit_process
+0x100003CA0	0x00000040	[ 18] _process_init
+0x100003CE0	0x00000870	[ 18] _process_run
+0x100004550	0x00000020	[ 18] _process_nevents
+0x100004570	0x00000050	[ 18] _process_post
+0x1000045C0	0x00000060	[ 18] _call_process
+0x100004620	0x00000020	[ 18] _process_poll
+0x100004640	0x0000000F	[ 18] _process_is_running
+0x100004650	0x00000010	[ 19] _rtimer_init
+0x100004660	0x00000030	[ 19] _rtimer_set
+0x100004690	0x00000038	[ 19] _rtimer_run_next
+0x1000046D0	0x00000020	[ 20] _stimer_set
+0x1000046F0	0x00000040	[ 20] _stimer_reset
+0x100004730	0x00000030	[ 20] _stimer_expired
+0x100004760	0x00000020	[ 20] _stimer_restart
+0x100004780	0x00000020	[ 20] _stimer_remaining
+0x1000047A0	0x00000018	[ 20] _stimer_elapsed
+0x1000047C0	0x00000020	[ 21] _timer_set
+0x1000047E0	0x00000030	[ 21] _timer_reset
+0x100004810	0x00000030	[ 21] _timer_expired
+0x100004840	0x00000020	[ 21] _timer_restart
+0x100004860	0x0000001F	[ 21] _timer_remaining
+0x100004880	0x00000010	[ 22] _list_init
+0x100004890	0x00000010	[ 22] _list_head
+0x1000048A0	0x00000010	[ 22] _list_copy
+0x1000048B0	0x00000030	[ 22] _list_tail
+0x1000048E0	0x00000080	[ 22] _list_add
+0x100004960	0x00000050	[ 22] _list_remove
+0x1000049B0	0x00000050	[ 22] _list_push
+0x100004A00	0x00000050	[ 22] _list_chop
+0x100004A50	0x00000020	[ 22] _list_pop
+0x100004A70	0x00000020	[ 22] _list_length
+0x100004A90	0x000000A0	[ 22] _list_insert
+0x100004B30	0x00000020	[ 22] _list_item_next
+0x100004B50	0x00000025	[ 22] _list_contains
+0x100004B80	0x00000040	[ 23] _memb_init
+0x100004BC0	0x00000050	[ 23] _memb_alloc
+0x100004C10	0x00000050	[ 23] _memb_free
+0x100004C60	0x00000030	[ 23] _memb_inmemb
+0x100004C90	0x00000178	[ 23] _memb_numfree
+0x100004E10	0x00000010	[ 24] _random_init
+0x100004E20	0x0000000E	[ 24] _random_rand
+0x100004E30	0x00000020	[ 25] _ringbuf_init
+0x100004E50	0x00000040	[ 25] _ringbuf_put
+0x100004E90	0x00000030	[ 25] _ringbuf_get
+0x100004EC0	0x00000010	[ 25] _ringbuf_size
+0x100004ED0	0x00000016	[ 25] _ringbuf_elements
+0x100004EF0	0x000000E0	[ 26] _process_thread_button_hal_process
+0x100004FD0	0x00000040	[ 26] _button_hal_get_by_id
+0x100005010	0x00000030	[ 26] _button_hal_get_by_index
+0x100005040	0x00000050	[ 26] _button_hal_get_state
+0x100005090	0x000000F0	[ 26] _button_hal_init
+0x100005180	0x00000020	[ 26] _press_release_handler
+0x1000051A0	0x000000B0	[ 26] _debounce_handler
+0x100005250	0x00000041	[ 26] _duration_exceeded_callback
+0x1000052A0	0x00000020	[ 27] _gpio_hal_register_handler
+0x1000052C0	0x00000050	[ 27] _gpio_hal_event_handler
+0x100005310	0x00000020	[ 27] _gpio_hal_init
+0x100005330	0x00000030	[ 27] _gpio_hal_arch_port_toggle_pin
+0x100005360	0x00000020	[ 27] _gpio_hal_arch_port_toggle_pins
+0x100005380	0x00000030	[ 27] _gpio_hal_arch_no_port_toggle_pin
+0x1000053B0	0x0000001E	[ 27] _gpio_hal_arch_no_port_toggle_pins
+0x1000053D0	0x00000010	[ 28] _leds_init
+0x1000053E0	0x00000010	[ 28] _leds_off
+0x1000053F0	0x00000010	[ 28] _leds_single_on
+0x100005400	0x00000010	[ 28] _leds_single_off
+0x100005410	0x00000010	[ 28] _leds_single_toggle
+0x100005420	0x00000010	[ 28] _leds_on
+0x100005430	0x00000010	[ 28] _leds_toggle
+0x100005440	0x00000010	[ 28] _leds_set
+0x100005450	0x00000008	[ 28] _leds_get
+0x100005460	0x00000010	[ 29] _init
+0x100005470	0x00000010	[ 29] _prepare
+0x100005480	0x00000010	[ 29] _transmit
+0x100005490	0x00000010	[ 29] _send
+0x1000054A0	0x00000010	[ 29] _radio_read
+0x1000054B0	0x00000010	[ 29] _channel_clear
+0x1000054C0	0x00000010	[ 29] _receiving_packet
+0x1000054D0	0x00000010	[ 29] _pending_packet
+0x1000054E0	0x00000010	[ 29] _on
+0x1000054F0	0x00000010	[ 29] _off
+0x100005500	0x00000030	[ 29] _get_value
+0x100005530	0x00000010	[ 29] _set_value
+0x100005540	0x00000010	[ 29] _get_object
+0x100005550	0x0000000B	[ 29] _set_object
+0x100005560	0x000000F0	[ 30] _process_thread_serial_line_process
+0x100005650	0x00000070	[ 30] _serial_line_input_byte
+0x1000056C0	0x0000002B	[ 30] _serial_line_init
+0x1000056F0	0x00000020	[ 31] _link_stats_from_lladdr
+0x100005710	0x00000020	[ 31] _link_stats_get_lladdr
+0x100005730	0x00000040	[ 31] _link_stats_is_fresh
+0x100005770	0x00000060	[ 31] _guess_etx_from_rssi
+0x1000057D0	0x00000170	[ 31] _link_stats_packet_sent
+0x100005940	0x000000D0	[ 31] _link_stats_input_callback
+0x100005A10	0x00000060	[ 31] _link_stats_reset
+0x100005A70	0x00000030	[ 31] _link_stats_init
+0x100005AA0	0x0000004A	[ 31] _periodic
+0x100005AF0	0x00000010	[ 32] _linkaddr_copy
+0x100005B00	0x00000020	[ 32] _linkaddr_cmp
+0x100005B20	0x00000013	[ 32] _linkaddr_set_node_addr
+0x100005B40	0x000000C0	[ 33] _nbr_table_count_entries
+0x100005C00	0x00000170	[ 33] _nbr_table_gc_get_worst
+0x100005D70	0x00000010	[ 33] _nbr_table_can_accept_new
+0x100005D80	0x00000010	[ 33] _nbr_table_entry_is_allowed
+0x100005D90	0x000001A0	[ 33] _entry_is_allowed
+0x100005F30	0x00000060	[ 33] _nbr_table_register
+0x100005F90	0x00000030	[ 33] _nbr_table_is_registered
+0x100005FC0	0x00000110	[ 33] _nbr_table_head
+0x1000060D0	0x000000B0	[ 33] _nbr_table_next
+0x100006180	0x000002A0	[ 33] _nbr_table_add_lladdr
+0x100006420	0x000000A0	[ 33] _nbr_table_get_from_lladdr
+0x1000064C0	0x00000070	[ 33] _nbr_table_remove
+0x100006530	0x00000040	[ 33] _nbr_table_lock
+0x100006570	0x00000040	[ 33] _nbr_table_unlock
+0x1000065B0	0x00000040	[ 33] _nbr_table_get_lladdr
+0x1000065F0	0x00000100	[ 33] _nbr_table_clear
+0x1000066F0	0x00000020	[ 33] _nbr_table_key_head
+0x100006710	0x0000000A	[ 33] _nbr_table_key_next
+0x100006720	0x00000080	[ 34] _netstack_process_ip_callback
+0x1000067A0	0x00000020	[ 34] _netstack_ip_packet_processor_add
+0x1000067C0	0x00000020	[ 34] _uip_ds6_ip_packet_processor_rm
+0x1000067E0	0x00000022	[ 34] _netstack_init
+0x100006810	0x00000070	[ 35] _packetbuf_clear
+0x100006880	0x00000050	[ 35] _packetbuf_attr_clear
+0x1000068D0	0x000000B0	[ 35] _packetbuf_copyfrom
+0x100006980	0x00000070	[ 35] _packetbuf_copyto
+0x1000069F0	0x00000010	[ 35] _packetbuf_hdrptr
+0x100006A00	0x00000020	[ 35] _packetbuf_dataptr
+0x100006A20	0x000001B0	[ 35] _packetbuf_hdralloc
+0x100006BD0	0x00000020	[ 35] _packetbuf_totlen
+0x100006BF0	0x00000030	[ 35] _packetbuf_hdrreduce
+0x100006C20	0x00000010	[ 35] _packetbuf_set_datalen
+0x100006C30	0x00000020	[ 35] _packetbuf_hdrlen
+0x100006C50	0x00000010	[ 35] _packetbuf_datalen
+0x100006C60	0x00000030	[ 35] _packetbuf_remaininglen
+0x100006C90	0x00000040	[ 35] _packetbuf_attr_copyto
+0x100006CD0	0x00000040	[ 35] _packetbuf_attr_copyfrom
+0x100006D10	0x00000020	[ 35] _packetbuf_set_attr
+0x100006D30	0x00000020	[ 35] _packetbuf_attr
+0x100006D50	0x00000020	[ 35] _packetbuf_set_addr
+0x100006D70	0x00000020	[ 35] _packetbuf_addr
+0x100006D90	0x0000001C	[ 35] _packetbuf_holds_broadcast
+0x100006DB0	0x00000020	[ 36] _queuebuf_init
+0x100006DD0	0x00000020	[ 36] _queuebuf_numfree
+0x100006DF0	0x00000080	[ 36] _queuebuf_new_from_packetbuf
+0x100006E70	0x00000020	[ 36] _queuebuf_update_attr_from_packetbuf
+0x100006E90	0x00000040	[ 36] _queuebuf_update_from_packetbuf
+0x100006ED0	0x00000050	[ 36] _queuebuf_free
+0x100006F20	0x00000060	[ 36] _queuebuf_to_packetbuf
+0x100006F80	0x00000030	[ 36] _queuebuf_dataptr
+0x100006FB0	0x00000010	[ 36] _queuebuf_datalen
+0x100006FC0	0x00000010	[ 36] _queuebuf_addr
+0x100006FD0	0x00000020	[ 36] _queuebuf_attr
+0x100006FF0	0x00000006	[ 36] _queuebuf_debug_print
+0x100007000	0x00000010	[ 37] _init
+0x100007010	0x00000010	[ 37] _send_packet
+0x100007020	0x00000010	[ 37] _packet_input
+0x100007030	0x00000010	[ 37] _on
+0x100007040	0x00000010	[ 37] _off
+0x100007050	0x00000008	[ 37] _max_payload
+0x100007060	0x00000120	[ 38] _process_thread_simple_udp_process
+0x100007180	0x00000030	[ 38] _simple_udp_send
+0x1000071B0	0x00000030	[ 38] _simple_udp_sendto
+0x1000071E0	0x00000030	[ 38] _simple_udp_sendto_port
+0x100007210	0x000000C1	[ 38] _simple_udp_register
+0x1000072E0	0x00000040	[ 39] _tcpip_output
+0x100007320	0x00000240	[ 39] _process_thread_tcpip_process
+0x100007560	0x00000020	[ 39] _udp_attach
+0x100007580	0x00000030	[ 39] _udp_new
+0x1000075B0	0x00000060	[ 39] _udp_broadcast_new
+0x100007610	0x00000030	[ 39] _tcpip_input
+0x100007640	0x00000290	[ 39] _tcpip_ipv6_output
+0x1000078D0	0x00000020	[ 39] _tcpip_poll_udp
+0x1000078F0	0x00000045	[ 39] _tcpip_uipcall
+0x100007940	0x00000020	[ 40] _uip_ds6_neighbors_init
+0x100007960	0x00000040	[ 40] _uip_ds6_nbr_rm
+0x1000079A0	0x00000070	[ 40] _uip_ds6_nbr_add
+0x100007A10	0x00000130	[ 40] _uip_ds6_nbr_update_ll
+0x100007B40	0x00000020	[ 40] _uip_ds6_nbr_ll_lookup
+0x100007B60	0x00000010	[ 40] _uip_ds6_nbr_get_ipaddr
+0x100007B70	0x00000020	[ 40] _uip_ds6_nbr_get_ll
+0x100007B90	0x00000050	[ 40] _uip_ds6_nbr_num
+0x100007BE0	0x00000020	[ 40] _uip_ds6_nbr_head
+0x100007C00	0x00000020	[ 40] _uip_ds6_nbr_next
+0x100007C20	0x00000070	[ 40] _uip_ds6_nbr_lookup
+0x100007C90	0x00000020	[ 40] _uip_ds6_nbr_ipaddr_from_lladdr
+0x100007CB0	0x00000080	[ 40] _uip_ds6_nbr_lladdr_from_ipaddr
+0x100007D30	0x00000006	[ 40] _uip_ds6_link_callback
+0x100007D40	0x00000020	[ 41] _uip_ds6_route_init
+0x100007D60	0x00000010	[ 41] _uip_ds6_route_count_nexthop_neighbors
+0x100007D70	0x00000010	[ 41] _uip_ds6_route_nexthop
+0x100007D80	0x00000010	[ 41] _uip_ds6_route_head
+0x100007D90	0x00000010	[ 41] _uip_ds6_route_next
+0x100007DA0	0x00000010	[ 41] _uip_ds6_route_is_nexthop
+0x100007DB0	0x00000010	[ 41] _uip_ds6_route_num_routes
+0x100007DC0	0x00000010	[ 41] _uip_ds6_route_lookup
+0x100007DD0	0x00000010	[ 41] _uip_ds6_route_add
+0x100007DE0	0x00000010	[ 41] _uip_ds6_route_rm
+0x100007DF0	0x00000010	[ 41] _uip_ds6_route_rm_by_nexthop
+0x100007E00	0x00000020	[ 41] _uip_ds6_defrt_head
+0x100007E20	0x000000C0	[ 41] _uip_ds6_defrt_add
+0x100007EE0	0x00000070	[ 41] _uip_ds6_defrt_lookup
+0x100007F50	0x00000060	[ 41] _uip_ds6_defrt_rm
+0x100007FB0	0x00000060	[ 41] _uip_ds6_defrt_choose
+0x100008010	0x000000AF	[ 41] _uip_ds6_defrt_periodic
+0x1000080C0	0x00000010	[ 42] _uip_ds6_default_prefix
+0x1000080D0	0x00000020	[ 42] _uip_ds6_set_default_prefix
+0x1000080F0	0x00000320	[ 42] _uip_ds6_init
+0x100008410	0x00000050	[ 42] _uip_ds6_compute_reachable_time
+0x100008460	0x00000140	[ 42] _uip_ds6_prefix_add
+0x1000085A0	0x00000020	[ 42] _uip_ds6_set_addr_iid
+0x1000085C0	0x00000220	[ 42] _uip_ds6_addr_add
+0x1000087E0	0x000000B0	[ 42] _uip_ds6_maddr_add
+0x100008890	0x00000170	[ 42] _uip_ds6_periodic
+0x100008A00	0x000000E0	[ 42] _uip_ds6_addr_rm
+0x100008AE0	0x000000D0	[ 42] _uip_ds6_list_loop
+0x100008BB0	0x00000010	[ 42] _uip_ds6_prefix_rm
+0x100008BC0	0x000000E0	[ 42] _uip_ds6_prefix_lookup
+0x100008CA0	0x00000080	[ 42] _uip_ds6_is_addr_onlink
+0x100008D20	0x00000090	[ 42] _uip_ds6_maddr_lookup
+0x100008DB0	0x00000010	[ 42] _uip_ds6_maddr_rm
+0x100008DC0	0x000000D0	[ 42] _uip_ds6_addr_lookup
+0x100008E90	0x000000B0	[ 42] _uip_ds6_get_link_local
+0x100008F40	0x000000B0	[ 42] _uip_ds6_get_global
+0x100008FF0	0x000000F0	[ 42] _uip_ds6_aaddr_add
+0x1000090E0	0x00000010	[ 42] _uip_ds6_aaddr_rm
+0x1000090F0	0x000000D0	[ 42] _uip_ds6_aaddr_lookup
+0x1000091C0	0x000001F0	[ 42] _uip_ds6_select_src
+0x1000093B0	0x00000150	[ 42] _get_match_length
+0x100009500	0x00000011	[ 42] _uip_ds6_set_lladdr_from_iid
+0x100009520	0x00000070	[ 43] _uip_icmp6_input
+0x100009590	0x00000020	[ 43] _uip_icmp6_register_input_handler
+0x1000095B0	0x000001B0	[ 43] _uip_icmp6_error_output
+0x100009760	0x000000D0	[ 43] _uip_icmp6_send
+0x100009830	0x00000030	[ 43] _uip_icmp6_echo_reply_callback_add
+0x100009860	0x00000020	[ 43] _uip_icmp6_echo_reply_callback_rm
+0x100009880	0x00000040	[ 43] _uip_icmp6_init
+0x1000098C0	0x000000A0	[ 43] _echo_request_input
+0x100009960	0x000000B3	[ 43] _echo_reply_input
+0x100009A20	0x00000020	[ 44] _uip_nd6_init
+0x100009A40	0x0000033F	[ 44] _ns_input
+0x100009D80	0x00000010	[ 45] _uip_packetqueue_new
+0x100009D90	0x00000050	[ 45] _uip_packetqueue_alloc
+0x100009DE0	0x00000030	[ 45] _packet_timedout
+0x100009E10	0x00000040	[ 45] _uip_packetqueue_free
+0x100009E50	0x00000020	[ 45] _uip_packetqueue_buf
+0x100009E70	0x00000020	[ 45] _uip_packetqueue_buflen
+0x100009E90	0x00000015	[ 45] _uip_packetqueue_set_buflen
+0x100009EB0	0x00000010	[ 46] _uip_sr_num_nodes
+0x100009EC0	0x000000A0	[ 46] _uip_sr_get_node
+0x100009F60	0x00000160	[ 46] _uip_sr_is_addr_reachable
+0x10000A0C0	0x000000E0	[ 46] _uip_sr_expire_parent
+0x10000A1A0	0x000001C0	[ 46] _uip_sr_update_node
+0x10000A360	0x00000030	[ 46] _uip_sr_init
+0x10000A390	0x00000020	[ 46] _uip_sr_node_head
+0x10000A3B0	0x00000010	[ 46] _uip_sr_node_next
+0x10000A3C0	0x000000D0	[ 46] _uip_sr_periodic
+0x10000A490	0x00000070	[ 46] _uip_sr_free_all
+0x10000A500	0x00000135	[ 46] _uip_sr_link_snprint
+0x10000A640	0x00000060	[ 47] _uip_udp_packet_send
+0x10000A6A0	0x000000D2	[ 47] _uip_udp_packet_sendto
+0x10000A780	0x000000E0	[ 48] _uip_chksum
+0x10000A860	0x00000010	[ 48] _uip_htons
+0x10000A870	0x00000010	[ 48] _uip_icmp6chksum
+0x10000A880	0x00000160	[ 48] _upper_layer_chksum
+0x10000A9E0	0x00000010	[ 48] _uip_udpchksum
+0x10000A9F0	0x00000070	[ 48] _uip_init
+0x10000AA60	0x000000A0	[ 48] _uip_remove_ext_hdr
+0x10000AB00	0x00000180	[ 48] _uip_udp_new
+0x10000AC80	0x00000870	[ 48] _uip_process
+0x10000B4F0	0x000000E0	[ 48] _ext_hdr_options_process
+0x10000B5D0	0x00000020	[ 48] _uip_htonl
+0x10000B5F0	0x00000079	[ 48] _uip_send
+0x10000B670	0x00000040	[ 49] _uipbuf_clear
+0x10000B6B0	0x00000020	[ 49] _uipbuf_clear_attr
+0x10000B6D0	0x00000040	[ 49] _uipbuf_add_ext_hdr
+0x10000B710	0x00000020	[ 49] _uipbuf_set_len
+0x10000B730	0x00000010	[ 49] _uipbuf_set_len_field
+0x10000B740	0x00000020	[ 49] _uipbuf_get_len_field
+0x10000B760	0x00000080	[ 49] _uipbuf_get_next_header
+0x10000B7E0	0x00000110	[ 49] _uipbuf_get_last_header
+0x10000B8F0	0x00000120	[ 49] _uipbuf_search_header
+0x10000BA10	0x00000030	[ 49] _uipbuf_get_attr
+0x10000BA40	0x00000030	[ 49] _uipbuf_set_attr
+0x10000BA70	0x00000030	[ 49] _uipbuf_set_default_attr
+0x10000BAA0	0x00000010	[ 49] _uipbuf_set_attr_flag
+0x10000BAB0	0x00000010	[ 49] _uipbuf_clr_attr_flag
+0x10000BAC0	0x00000020	[ 49] _uipbuf_is_attr_flag
+0x10000BAE0	0x00000019	[ 49] _uipbuf_init
+0x10000BB00	0x00000140	[ 50] _uiplib_ip6addrconv
+0x10000BC40	0x000001D0	[ 50] _uiplib_ip4addrconv
+0x10000BE10	0x00000060	[ 50] _uiplib_ipaddr_print
+0x10000BE70	0x0000020D	[ 50] _uiplib_ipaddr_snprint
+0x10000C080	0x00000090	[ 51] _rpl_dag_root_print_links
+0x10000C110	0x00000030	[ 51] _rpl_dag_root_is_root
+0x10000C140	0x00000090	[ 51] _rpl_dag_root_set_prefix
+0x10000C1D0	0x0000010C	[ 51] _rpl_dag_root_start
+0x10000C2E0	0x00000030	[ 52] _rpl_dag_state_to_str
+0x10000C310	0x00000030	[ 52] _rpl_dag_get_root_ipaddr
+0x10000C340	0x00000070	[ 52] _rpl_dag_leave
+0x10000C3B0	0x00000020	[ 52] _rpl_dag_poison_and_leave
+0x10000C3D0	0x00000060	[ 52] _rpl_dag_periodic
+0x10000C430	0x00000040	[ 52] _rpl_is_addr_in_our_dag
+0x10000C470	0x00000020	[ 52] _rpl_get_default_instance
+0x10000C490	0x00000020	[ 52] _rpl_get_any_dag
+0x10000C4B0	0x00000030	[ 52] _rpl_refresh_routes
+0x10000C4E0	0x00000070	[ 52] _rpl_global_repair
+0x10000C550	0x00000050	[ 52] _rpl_local_repair
+0x10000C5A0	0x00000030	[ 52] _rpl_dag_ready_to_advertise
+0x10000C5D0	0x000001A0	[ 52] _rpl_dag_update_state
+0x10000C770	0x00000270	[ 52] _rpl_process_dio
+0x10000C9E0	0x00000170	[ 52] _process_dio_init_dag
+0x10000CB50	0x00000050	[ 52] _rpl_process_dis
+0x10000CBA0	0x00000080	[ 52] _rpl_process_dao
+0x10000CC20	0x00000070	[ 52] _rpl_process_dao_ack
+0x10000CC90	0x00000050	[ 52] _rpl_process_hbh
+0x10000CCE0	0x00000150	[ 52] _rpl_dag_init_root
+0x10000CE30	0x00000017	[ 52] _rpl_dag_init
+0x10000CE50	0x000000C0	[ 53] _rpl_ext_header_srh_get_next_hop
+0x10000CF10	0x00000130	[ 53] _rpl_ext_header_srh_update
+0x10000D040	0x000000F0	[ 53] _rpl_ext_header_hbh_update
+0x10000D130	0x00000640	[ 53] _rpl_ext_header_update
+0x10000D770	0x00000133	[ 53] _rpl_ext_header_remove
+0x10000D8B0	0x00000060	[ 54] _rpl_icmp6_update_nbr_table
+0x10000D910	0x00000050	[ 54] _rpl_icmp6_dis_output
+0x10000D960	0x00000270	[ 54] _rpl_icmp6_dio_output
+0x10000DBD0	0x00000100	[ 54] _rpl_icmp6_dao_output
+0x10000DCD0	0x00000070	[ 54] _rpl_icmp6_dao_ack_output
+0x10000DD40	0x00000040	[ 54] _rpl_icmp6_init
+0x10000DD80	0x00000040	[ 54] _dis_input
+0x10000DDC0	0x00000380	[ 54] _dio_input
+0x10000E140	0x000001B0	[ 54] _dao_input
+0x10000E2F0	0x00000040	[ 54] _dao_ack_input
+0x10000E330	0x00000010	[ 55] _reset
+0x10000E340	0x00000020	[ 55] _nbr_link_metric
+0x10000E360	0x00000030	[ 55] _nbr_has_usable_link
+0x10000E390	0x000000A0	[ 55] _nbr_is_acceptable_parent
+0x10000E430	0x00000070	[ 55] _nbr_path_cost
+0x10000E4A0	0x000000A0	[ 55] _rank_via_nbr
+0x10000E540	0x00000410	[ 55] _best_parent
+0x10000E950	0x00000010	[ 55] _update_metric_container
+0x10000E960	0x00000071	[ 56] _rpl_nbr_gc_get_worst
+0x10000E9E0	0x000003C0	[ 57] _rpl_neighbor_snprint
+0x10000EDA0	0x00000120	[ 57] _best_parent
+0x10000EEC0	0x00000020	[ 57] _rpl_neighbor_get_link_stats
+0x10000EEE0	0x00000020	[ 57] _rpl_neighbor_get_ipaddr
+0x10000EF00	0x00000030	[ 57] _rpl_neighbor_get_link_metric
+0x10000EF30	0x00000030	[ 57] _rpl_neighbor_rank_via_nbr
+0x10000EF60	0x00000030	[ 57] _rpl_neighbor_is_acceptable_parent
+0x10000EF90	0x000000A0	[ 57] _rpl_neighbor_print_list
+0x10000F030	0x00000050	[ 57] _rpl_neighbor_count
+0x10000F080	0x00000020	[ 57] _rpl_neighbor_get_from_lladdr
+0x10000F0A0	0x00000020	[ 57] _rpl_neighbor_get_lladdr
+0x10000F0C0	0x00000030	[ 57] _rpl_neighbor_is_fresh
+0x10000F0F0	0x00000030	[ 57] _rpl_neighbor_is_parent
+0x10000F120	0x00000090	[ 57] _rpl_neighbor_set_preferred_parent
+0x10000F1B0	0x000000B0	[ 57] _rpl_neighbor_remove_all
+0x10000F260	0x00000060	[ 57] _remove_neighbor
+0x10000F2C0	0x00000030	[ 57] _rpl_neighbor_get_from_ipaddr
+0x10000F2F0	0x000000C0	[ 57] _rpl_neighbor_select_best
+0x10000F3B0	0x00000018	[ 57] _rpl_neighbor_init
+0x10000F3D0	0x00000060	[ 58] _rpl_timers_schedule_periodic_dis
+0x10000F430	0x00000090	[ 58] _handle_dis_timer
+0x10000F4C0	0x000000B0	[ 58] _rpl_timers_dio_reset
+0x10000F570	0x00000040	[ 58] _rpl_timers_schedule_unicast_dio
+0x10000F5B0	0x00000030	[ 58] _handle_unicast_dio_timer
+0x10000F5E0	0x00000060	[ 58] _rpl_timers_schedule_dao
+0x10000F640	0x00000080	[ 58] _send_new_dao
+0x10000F6C0	0x00000050	[ 58] _rpl_timers_schedule_dao_ack
+0x10000F710	0x00000030	[ 58] _handle_dao_ack_timer
+0x10000F740	0x00000080	[ 58] _rpl_timers_notify_dao_ack
+0x10000F7C0	0x00000020	[ 58] _get_probing_delay
+0x10000F7E0	0x00000160	[ 58] _get_probing_target
+0x10000F940	0x00000040	[ 58] _rpl_schedule_probing
+0x10000F980	0x00000070	[ 58] _handle_probing_timer
+0x10000F9F0	0x00000050	[ 58] _rpl_schedule_probing_now
+0x10000FA40	0x00000040	[ 58] _rpl_timers_unschedule_leaving
+0x10000FA80	0x00000050	[ 58] _rpl_timers_schedule_leaving
+0x10000FAD0	0x00000020	[ 58] _handle_leaving_timer
+0x10000FAF0	0x00000070	[ 58] _rpl_timers_init
+0x10000FB60	0x000000B0	[ 58] _handle_periodic_timer
+0x10000FC10	0x00000070	[ 58] _rpl_timers_stop_dag_timers
+0x10000FC80	0x00000020	[ 58] _rpl_timers_unschedule_state_update
+0x10000FCA0	0x00000030	[ 58] _rpl_timers_schedule_state_update
+0x10000FCD0	0x00000010	[ 58] _handle_state_update
+0x10000FCE0	0x000000E0	[ 58] _handle_dio_timer
+0x10000FDC0	0x00000079	[ 58] _resend_dao
+0x10000FE40	0x00000040	[ 59] _rpl_lollipop_greater_than
+0x10000FE80	0x00000120	[ 59] _rpl_get_global_address
+0x10000FFA0	0x00000050	[ 59] _rpl_link_callback
+0x10000FFF0	0x00000020	[ 59] _rpl_has_joined
+0x100010010	0x00000020	[ 59] _rpl_is_reachable
+0x100010030	0x00000070	[ 59] _rpl_reset_prefix
+0x1000100A0	0x000000F0	[ 59] _rpl_set_prefix_from_addr
+0x100010190	0x00000040	[ 59] _rpl_set_prefix
+0x1000101D0	0x00000010	[ 59] _rpl_set_leaf_only
+0x1000101E0	0x00000010	[ 59] _rpl_get_leaf_only
+0x1000101F0	0x00000050	[ 59] _init
+0x100010240	0x00000030	[ 59] _get_sr_node_ipaddr
+0x100010270	0x00000010	[ 59] _neighbor_state_changed
+0x100010280	0x00000006	[ 59] _drop_route
+0x100010290	0x00000020	[  6] _output.cold.1
+0x1000102B0	0x00000015	[  6] _handle_fd.cold.1
+0x1000102C6	0x00000006	[ 60] ___bzero
+0x1000102CC	0x00000006	[ 60] ___darwin_check_fd_set_overflow
+0x1000102D2	0x00000006	[ 60] ___error
+0x1000102D8	0x00000006	[ 60] ___memcpy_chk
+0x1000102DE	0x00000006	[ 60] ___memmove_chk
+0x1000102E4	0x00000006	[ 60] ___snprintf_chk
+0x1000102EA	0x00000006	[ 60] ___stack_chk_fail
+0x1000102F0	0x00000006	[ 60] ___strncat_chk
+0x1000102F6	0x00000006	[ 60] ___vsnprintf_chk
+0x1000102FC	0x00000006	[ 60] _atexit
+0x100010302	0x00000006	[ 60] _clock_gettime
+0x100010308	0x00000006	[ 60] _err
+0x10001030E	0x00000006	[ 60] _exit
+0x100010314	0x00000006	[ 60] _fflush
+0x10001031A	0x00000006	[ 60] _fprintf
+0x100010320	0x00000006	[ 60] _malloc
+0x100010326	0x00000006	[ 60] _memcmp
+0x10001032C	0x00000006	[ 60] _memcpy
+0x100010332	0x00000006	[ 60] _memmove
+0x100010338	0x00000006	[ 60] _open
+0x10001033E	0x00000006	[ 60] _perror
+0x100010344	0x00000006	[ 60] _printf
+0x10001034A	0x00000006	[ 60] _putchar
+0x100010350	0x00000006	[ 60] _puts
+0x100010356	0x00000006	[ 60] _rand
+0x10001035C	0x00000006	[ 60] _read
+0x100010362	0x00000006	[ 60] _select$1050
+0x100010368	0x00000006	[ 60] _setitimer
+0x10001036E	0x00000006	[ 60] _setvbuf
+0x100010374	0x00000006	[ 60] _signal
+0x10001037A	0x00000006	[ 60] _sleep
+0x100010380	0x00000006	[ 60] _srand
+0x100010386	0x00000006	[ 60] _strcmp
+0x10001038C	0x00000006	[ 60] _system
+0x100010392	0x00000006	[ 60] _write
+0x100010398	0x00000010	[  0] helper helper
+0x1000103A8	0x0000000A	[ 60] ___bzero
+0x1000103B2	0x0000000A	[ 60] ___darwin_check_fd_set_overflow
+0x1000103BC	0x0000000A	[ 60] ___error
+0x1000103C6	0x0000000A	[ 60] ___memcpy_chk
+0x1000103D0	0x0000000A	[ 60] ___memmove_chk
+0x1000103DA	0x0000000A	[ 60] ___snprintf_chk
+0x1000103E4	0x0000000A	[ 60] ___stack_chk_fail
+0x1000103EE	0x0000000A	[ 60] ___strncat_chk
+0x1000103F8	0x0000000A	[ 60] ___vsnprintf_chk
+0x100010402	0x0000000A	[ 60] _atexit
+0x10001040C	0x0000000A	[ 60] _clock_gettime
+0x100010416	0x0000000A	[ 60] _err
+0x100010420	0x0000000A	[ 60] _exit
+0x10001042A	0x0000000A	[ 60] _fflush
+0x100010434	0x0000000A	[ 60] _fprintf
+0x10001043E	0x0000000A	[ 60] _malloc
+0x100010448	0x0000000A	[ 60] _memcmp
+0x100010452	0x0000000A	[ 60] _memcpy
+0x10001045C	0x0000000A	[ 60] _memmove
+0x100010466	0x0000000A	[ 60] _open
+0x100010470	0x0000000A	[ 60] _perror
+0x10001047A	0x0000000A	[ 60] _printf
+0x100010484	0x0000000A	[ 60] _putchar
+0x10001048E	0x0000000A	[ 60] _puts
+0x100010498	0x0000000A	[ 60] _rand
+0x1000104A2	0x0000000A	[ 60] _read
+0x1000104AC	0x0000000A	[ 60] _select$1050
+0x1000104B6	0x0000000A	[ 60] _setitimer
+0x1000104C0	0x0000000A	[ 60] _setvbuf
+0x1000104CA	0x0000000A	[ 60] _signal
+0x1000104D4	0x0000000A	[ 60] _sleep
+0x1000104DE	0x0000000A	[ 60] _srand
+0x1000104E8	0x0000000A	[ 60] _strcmp
+0x1000104F2	0x0000000A	[ 60] _system
+0x1000104FC	0x0000000A	[ 60] _write
+0x100010506	0x0000000B	[  1] literal string: UDP server
+0x100010511	0x0000000F	[  1] literal string: [%-4s: %-10s] 
+0x100010520	0x00000005	[  1] literal string: INFO
+0x100010525	0x00000004	[  1] literal string: App
+0x100010529	0x0000001E	[  1] literal string: Received request '%.*s' from 
+0x100010547	0x00000012	[  1] literal string: Sending response.
+0x100010559	0x0000000E	[  2] literal string: get_time: %d\n
+0x100010567	0x0000001D	[  2] literal string: checking if should be asleep
+0x100010584	0x00000007	[  3] literal string: select
+0x10001058B	0x00000006	[  3] literal string: %s%s\n
+0x100010591	0x00000004	[  3] literal string: %s\n
+0x100010595	0x00000007	[  3] literal string: Native
+0x10001059C	0x0000001B	[  3] literal string: Added global IPv6 address 
+0x1000105B7	0x00000005	[  6] literal string: tun6
+0x1000105BC	0x00000005	[  6] literal string: WARN
+0x1000105C1	0x00000005	[  6] literal string: Tun6
+0x1000105C6	0x0000001E	[  6] literal string: opened %s device ``/dev/%s''\n
+0x1000105E4	0x00000004	[  6] literal string: tun
+0x1000105E8	0x00000006	[  6] literal string: /dev/
+0x1000105EE	0x00000010	[  6] literal string: tun_input: read
+0x1000105FE	0x00000011	[  6] literal string: ifconfig %s down
+0x10001060F	0x00000029	[  6] literal string: sysctl -w net.ipv6.conf.all.forwarding=1
+0x100010638	0x0000004B	[  6] literal string: netstat -nr | awk '{ if ($2 == "%s") print "route delete -net "$1; }' | sh
+0x100010683	0x0000000B	[  6] literal string: signal %d\n
+0x10001068E	0x00000018	[  6] literal string: ifconfig %s inet6 %s up
+0x1000106A6	0x00000023	[  6] literal string: sysctl -w net.inet.ip.forwarding=1
+0x1000106C9	0x0000000D	[  6] literal string: ifconfig %s\n
+0x1000106D6	0x0000000B	[  6] literal string: fd00::1/64
+0x1000106E1	0x00000015	[  6] literal string: serial_to_tun: write
+0x1000106F6	0x00000054	[  6] literal string: Failed to open tun device (you may be lacking permission). Running without network.
+0x10001074A	0x00000005	[ 11] literal string: Main
+0x10001074F	0x0000000F	[ 11] literal string: - Routing: %s\n
+0x10001075E	0x0000000B	[ 11] literal string: - Net: %s\n
+0x100010769	0x0000000B	[ 11] literal string: - MAC: %s\n
+0x100010774	0x0000001A	[ 11] literal string: - 802.15.4 PANID: 0x%04x\n
+0x10001078E	0x00000020	[ 11] literal string: - 802.15.4 Default channel: %u\n
+0x1000107AE	0x0000000D	[ 11] literal string: Node ID: %u\n
+0x1000107BB	0x00000015	[ 11] literal string: Link-layer address: 
+0x1000107D0	0x00000024	[ 11] literal string: Tentative link-local IPv6 address: 
+0x1000107F4	0x00000036	[ 11] literal string: Starting Contiki-NG-release/v4.6-220-gd794c6b1d-dirty
+0x10001082A	0x0000000F	[ 13] literal string: Ctimer process
+0x100010839	0x0000000C	[ 15] literal string: Event timer
+0x100010845	0x00000004	[ 16] literal string: rpl
+0x100010849	0x00000006	[ 16] literal string: tcpip
+0x10001084F	0x00000005	[ 16] literal string: ipv6
+0x100010854	0x00000008	[ 16] literal string: 6lowpan
+0x10001085C	0x00000008	[ 16] literal string: nullnet
+0x100010864	0x00000004	[ 16] literal string: mac
+0x100010868	0x00000007	[ 16] literal string: framer
+0x10001086F	0x00000005	[ 16] literal string: 6top
+0x100010874	0x00000005	[ 16] literal string: coap
+0x100010879	0x00000005	[ 16] literal string: snmp
+0x10001087E	0x00000006	[ 16] literal string: lwm2m
+0x100010884	0x00000005	[ 16] literal string: main
+0x100010889	0x00000003	[ 16] literal string: %s
+0x10001088C	0x00000008	[ 16] literal string: 6A-NULL
+0x100010894	0x00000003	[ 16] literal string: 6M
+0x100010897	0x00000003	[ 16] literal string: 6L
+0x10001089A	0x00000003	[ 16] literal string: 6G
+0x10001089D	0x00000008	[ 16] literal string: %s-%04x
+0x1000108A5	0x0000000F	[ 16] literal string: (NULL LL addr)
+0x1000108B4	0x00000005	[ 16] literal string: %02x
+0x1000108B9	0x00000008	[ 16] literal string: LL-NULL
+0x1000108C1	0x00000008	[ 16] literal string: LL-%04x
+0x1000108C9	0x00000004	[ 16] literal string: all
+0x1000108CD	0x00000005	[ 16] literal string: None
+0x1000108D2	0x00000007	[ 16] literal string: Errors
+0x1000108D9	0x00000009	[ 16] literal string: Warnings
+0x1000108E2	0x00000005	[ 16] literal string: Info
+0x1000108E7	0x00000006	[ 16] literal string: Debug
+0x1000108ED	0x00000004	[ 16] literal string: N/A
+0x1000108F1	0x00000013	[ 26] literal string: Button HAL process
+0x100010904	0x0000000E	[ 30] literal string: Serial driver
+0x100010912	0x00000008	[ 37] literal string: nullmac
+0x10001091A	0x00000013	[ 38] literal string: Simple UDP process
+0x10001092D	0x0000000D	[ 39] literal string: TCP/IP stack
+0x10001093A	0x0000000F	[ 46] literal string:   (DODAG root)
+0x100010949	0x00000006	[ 46] literal string:   to 
+0x10001094F	0x00000019	[ 46] literal string:  (lifetime: %lu seconds)
+0x100010968	0x00000016	[ 46] literal string:  (lifetime: infinite)
+0x10001097E	0x0000000F	[ 50] literal string: (NULL IP addr)
+0x10001098D	0x00000013	[ 50] literal string: ::FFFF:%u.%u.%u.%u
+0x1000109A0	0x00000003	[ 50] literal string: ::
+0x1000109A3	0x00000002	[ 50] literal string: :
+0x1000109A5	0x00000003	[ 50] literal string: %x
+0x1000109A8	0x0000000C	[ 52] literal string: initialized
+0x1000109B4	0x00000007	[ 52] literal string: joined
+0x1000109BB	0x0000000A	[ 52] literal string: reachable
+0x1000109C5	0x0000000A	[ 52] literal string: poisoning
+0x1000109CF	0x00000008	[ 52] literal string: unknown
+0x1000109D7	0x0000000D	[ 52] literal string: Local repair
+0x1000109E4	0x0000000E	[ 52] literal string: Poison routes
+0x1000109F2	0x00000018	[ 52] literal string: Significant rank update
+0x100010A0A	0x0000000B	[ 52] literal string: Got parent
+0x100010A15	0x0000000E	[ 52] literal string: Multicast DIS
+0x100010A23	0x0000000A	[ 52] literal string: Reachable
+0x100010A2D	0x0000000A	[ 52] literal string: Init root
+0x100010A37	0x00000005	[ 52] literal string: Join
+0x100010A3C	0x0000001C	[ 52] literal string: Heard old version from root
+0x100010A58	0x00000022	[ 57] literal string: %5u, %5u => %5u -- %2u %c%c%c%c%c
+0x100010A7A	0x00000015	[ 57] literal string:  (last tx %u min ago
+0x100010A8F	0x00000008	[ 57] literal string:  (no tx
+0x100010A97	0x00000017	[ 57] literal string: , better since %u min)
+0x100010AAE	0x00000002	[ 57] literal string: )
+0x100010AB0	0x0000000C	[ 58] literal string: DAO max rtx
+0x100010ABC	0x00000009	[ 59] literal string: RPL Lite
+0x100010AD0	0x00000008	[  2] 8-byte-literal
+0x100010AD8	0x00000008	[  2] 8-byte-literal
+0x100010AE0	0x00000008	[  2] 8-byte-literal
+0x100010AE8	0x00000008	[  2] 8-byte-literal
+0x100010AF0	0x00000008	[  2] 8-byte-literal
+0x100010AF8	0x00000001	[  5] _button_hal_button_count
+0x100010B00	0x00000010	[ 10] 16-byte-literal
+0x100010B10	0x00000010	[ 10] 16-byte-literal
+0x100010B20	0x00000010	[ 10] 16-byte-literal
+0x100010B30	0x00000010	[ 10] 16-byte-literal
+0x100010B40	0x00000010	[ 10] 16-byte-literal
+0x100010B50	0x00000010	[ 10] 16-byte-literal
+0x100010B60	0x00000010	[ 10] 16-byte-literal
+0x100010B70	0x00000010	[ 10] 16-byte-literal
+0x100010B80	0x00000010	[ 10] 16-byte-literal
+0x100010B90	0x00000010	[ 10] 16-byte-literal
+0x100010BA0	0x00000010	[ 10] 16-byte-literal
+0x100010BB0	0x00000010	[ 10] 16-byte-literal
+0x100010BC0	0x00000010	[ 10] 16-byte-literal
+0x100010BD0	0x00000010	[ 10] 16-byte-literal
+0x100010BE0	0x00000010	[ 23] 16-byte-literal
+0x100010BF0	0x00000010	[ 23] 16-byte-literal
+0x100010C00	0x00000008	[ 32] _linkaddr_null
+0x100010C08	0x000003F4	[  0] compact unwind info
+0x100011000	0x00000008	[  0] non-lazy-pointer-to-local: ___darwin_check_fd_set_overflow
+0x100011008	0x00000008	[  0] non-lazy-pointer-to-local: ___stack_chk_guard
+0x100011010	0x00000008	[  0] non-lazy-pointer-to-local: ___stderrp
+0x100011018	0x00000008	[  0] non-lazy-pointer-to-local: ___stdoutp
+0x100011020	0x00000008	[  0] non-lazy-pointer-to-local: _autostart_processes
+0x100011028	0x00000008	[  0] non-lazy-pointer-to-local: _button_hal_button_count
+0x100011030	0x00000008	[  0] non-lazy-pointer-to-local: _button_hal_buttons
+0x100011038	0x00000008	[  0] non-lazy-pointer-to-local: _button_hal_periodic_event
+0x100011040	0x00000008	[  0] non-lazy-pointer-to-local: _button_hal_press_event
+0x100011048	0x00000008	[  0] non-lazy-pointer-to-local: _button_hal_release_event
+0x100011050	0x00000008	[  0] non-lazy-pointer-to-local: _contiki_argv
+0x100011058	0x00000008	[  0] non-lazy-pointer-to-local: _curr_instance
+0x100011060	0x00000008	[  0] non-lazy-pointer-to-local: _curr_log_level_main
+0x100011068	0x00000008	[  0] non-lazy-pointer-to-local: _etimer_process
+0x100011070	0x00000008	[  0] non-lazy-pointer-to-local: _linkaddr_node_addr
+0x100011078	0x00000008	[  0] non-lazy-pointer-to-local: _linkaddr_null
+0x100011080	0x00000008	[  0] non-lazy-pointer-to-local: _node_id
+0x100011088	0x00000008	[  0] non-lazy-pointer-to-local: _nullmac_driver
+0x100011090	0x00000008	[  0] non-lazy-pointer-to-local: _nullradio_driver
+0x100011098	0x00000008	[  0] non-lazy-pointer-to-local: _packetbuf_addrs
+0x1000110A0	0x00000008	[  0] non-lazy-pointer-to-local: _packetbuf_attrs
+0x1000110A8	0x00000008	[  0] non-lazy-pointer-to-local: _periodic_timer
+0x1000110B0	0x00000008	[  0] non-lazy-pointer-to-local: _process_current
+0x1000110B8	0x00000008	[  0] non-lazy-pointer-to-local: _rpl_lite_driver
+0x1000110C0	0x00000008	[  0] non-lazy-pointer-to-local: _rpl_mrhof
+0x1000110C8	0x00000008	[  0] non-lazy-pointer-to-local: _rpl_multicast_addr
+0x1000110D0	0x00000008	[  0] non-lazy-pointer-to-local: _rpl_neighbors
+0x1000110D8	0x00000008	[  0] non-lazy-pointer-to-local: _serial_line_event_message
+0x1000110E0	0x00000008	[  0] non-lazy-pointer-to-local: _serial_line_input_byte
+0x1000110E8	0x00000008	[  0] non-lazy-pointer-to-local: _tcpip_event
+0x1000110F0	0x00000008	[  0] non-lazy-pointer-to-local: _tcpip_process
+0x1000110F8	0x00000008	[  0] non-lazy-pointer-to-local: _tun6_net_driver
+0x100011100	0x00000008	[  0] non-lazy-pointer-to-local: _uip_aligned_buf
+0x100011108	0x00000008	[  0] non-lazy-pointer-to-local: _uip_appdata
+0x100011110	0x00000008	[  0] non-lazy-pointer-to-local: _uip_conn
+0x100011118	0x00000008	[  0] non-lazy-pointer-to-local: _uip_ds6_addr_size
+0x100011120	0x00000008	[  0] non-lazy-pointer-to-local: _uip_ds6_if
+0x100011128	0x00000008	[  0] non-lazy-pointer-to-local: _uip_ds6_netif_addr_list_offset
+0x100011130	0x00000008	[  0] non-lazy-pointer-to-local: _uip_ds6_prefix_list
+0x100011138	0x00000008	[  0] non-lazy-pointer-to-local: _uip_ds6_timer_periodic
+0x100011140	0x00000008	[  0] non-lazy-pointer-to-local: _uip_ext_len
+0x100011148	0x00000008	[  0] non-lazy-pointer-to-local: _uip_flags
+0x100011150	0x00000008	[  0] non-lazy-pointer-to-local: _uip_last_proto
+0x100011158	0x00000008	[  0] non-lazy-pointer-to-local: _uip_len
+0x100011160	0x00000008	[  0] non-lazy-pointer-to-local: _uip_lladdr
+0x100011168	0x00000008	[  0] non-lazy-pointer-to-local: _uip_sappdata
+0x100011170	0x00000008	[  0] non-lazy-pointer-to-local: _uip_slen
+0x100011178	0x00000008	[  0] non-lazy-pointer-to-local: _uip_udp_conn
+0x100011180	0x00000008	[  0] non-lazy-pointer-to-local: _uip_udp_conns
+0x100011188	0x00000008	[  0] non-lazy-pointer-to-local: dyld_stub_binder
+0x100011190	0x00000010	[  1] _autostart_processes
+0x1000111A0	0x00000010	[  3] _stdin_fd
+0x1000111B0	0x00000020	[  6] _tun6_net_driver
+0x1000111D0	0x00000010	[  6] _tun_select_callback
+0x1000111E0	0x00000028	[ 16] l_switch.table.log_level_to_str
+0x100011208	0x00000070	[ 29] _nullradio_driver
+0x100011278	0x00000038	[ 37] _nullmac_driver
+0x1000112B0	0x00000020	[ 52] l_switch.table.rpl_dag_state_to_str
+0x1000112D0	0x000000A8	[ 59] _rpl_lite_driver
+0x100012000	0x00000008	[ 60] ___bzero
+0x100012008	0x00000008	[ 60] ___darwin_check_fd_set_overflow
+0x100012010	0x00000008	[ 60] ___error
+0x100012018	0x00000008	[ 60] ___memcpy_chk
+0x100012020	0x00000008	[ 60] ___memmove_chk
+0x100012028	0x00000008	[ 60] ___snprintf_chk
+0x100012030	0x00000008	[ 60] ___stack_chk_fail
+0x100012038	0x00000008	[ 60] ___strncat_chk
+0x100012040	0x00000008	[ 60] ___vsnprintf_chk
+0x100012048	0x00000008	[ 60] _atexit
+0x100012050	0x00000008	[ 60] _clock_gettime
+0x100012058	0x00000008	[ 60] _err
+0x100012060	0x00000008	[ 60] _exit
+0x100012068	0x00000008	[ 60] _fflush
+0x100012070	0x00000008	[ 60] _fprintf
+0x100012078	0x00000008	[ 60] _malloc
+0x100012080	0x00000008	[ 60] _memcmp
+0x100012088	0x00000008	[ 60] _memcpy
+0x100012090	0x00000008	[ 60] _memmove
+0x100012098	0x00000008	[ 60] _open
+0x1000120A0	0x00000008	[ 60] _perror
+0x1000120A8	0x00000008	[ 60] _printf
+0x1000120B0	0x00000008	[ 60] _putchar
+0x1000120B8	0x00000008	[ 60] _puts
+0x1000120C0	0x00000008	[ 60] _rand
+0x1000120C8	0x00000008	[ 60] _read
+0x1000120D0	0x00000008	[ 60] _select$1050
+0x1000120D8	0x00000008	[ 60] _setitimer
+0x1000120E0	0x00000008	[ 60] _setvbuf
+0x1000120E8	0x00000008	[ 60] _signal
+0x1000120F0	0x00000008	[ 60] _sleep
+0x1000120F8	0x00000008	[ 60] _srand
+0x100012100	0x00000008	[ 60] _strcmp
+0x100012108	0x00000008	[ 60] _system
+0x100012110	0x00000008	[ 60] _write
+0x100012120	0x00000008	[  0] __dyld_private
+0x100012128	0x00000020	[  1] _udp_server_process
+0x100012148	0x00000010	[  2] _state
+0x100012160	0x00000014	[  6] _config_tundev
+0x100012174	0x00000004	[  6] _tunfd
+0x100012178	0x00000020	[ 13] _ctimer_process
+0x100012198	0x00000020	[ 15] _etimer_process
+0x1000121C0	0x00000010	[ 16] _curr_log_level_main
+0x1000121D0	0x00000138	[ 16] _all_modules
+0x100012308	0x00000020	[ 26] _button_hal_process
+0x100012328	0x00000020	[ 30] _serial_line_process
+0x100012348	0x00000018	[ 31] _link_stats_struct
+0x100012360	0x00000018	[ 33] _neighbor_addr_mem
+0x100012378	0x00000018	[ 36] _buframmem
+0x100012390	0x00000018	[ 36] _bufmem
+0x1000123A8	0x00000020	[ 38] _simple_udp_process
+0x1000123C8	0x00000020	[ 39] _tcpip_process
+0x1000123E8	0x00000018	[ 40] _ds6_neighbors_struct
+0x100012400	0x00000018	[ 41] _defaultroutermemb
+0x100012418	0x00000018	[ 43] _echo_request_handler
+0x100012430	0x00000018	[ 43] _echo_reply_handler
+0x100012448	0x00000018	[ 44] _ns_input_handler
+0x100012460	0x00000018	[ 45] _packets_memb
+0x100012478	0x00000018	[ 46] _nodememb
+0x100012490	0x00000018	[ 54] _dis_handler
+0x1000124A8	0x00000018	[ 54] _dio_handler
+0x1000124C0	0x00000018	[ 54] _dao_handler
+0x1000124D8	0x00000018	[ 54] _dao_ack_handler
+0x1000124F0	0x00000048	[ 55] _rpl_mrhof
+0x100012538	0x00000018	[ 57] _rpl_neighbors_struct
+0x100012550	0x00000008	[ 57] _rpl_neighbors
+0x100012560	0x00000038	[  1] _udp_conn
+0x1000125A0	0x00000040	[  3] _select_callback
+0x1000125E0	0x00000008	[  3] _select_max
+0x1000125E8	0x00000008	[  3] _input_handler
+0x1000125F0	0x00000004	[  9] _stat
+0x100012600	0x00000080	[ 10] _pin_cfg
+0x100012680	0x00000020	[ 10] _pin_state
+0x1000126A0	0x00000008	[ 13] _initialized
+0x1000126A8	0x00000008	[ 13] _ctimer_list_list
+0x1000126B0	0x00000008	[ 15] _timerlist
+0x1000126B8	0x00000008	[ 15] _next_expiration
+0x1000126C0	0x00000001	[ 18] _lastevent
+0x1000126C1	0x00000001	[ 18] _fevent
+0x1000126C2	0x00000001	[ 18] _nevents
+0x1000126C3	0x0000000D	[ 18] _poll_requested
+0x1000126D0	0x00000300	[ 18] _events
+0x1000129D0	0x00000008	[ 19] _next_rtimer
+0x1000129E0	0x00000018	[ 26] _button_event_handlers
+0x1000129F8	0x00000004	[ 26] _pmask
+0x100012A00	0x00000008	[ 27] _handlers_list
+0x100012A10	0x00000008	[ 30] _serial_line_input_byte.overflow
+0x100012A18	0x00000018	[ 30] _rxbuf
+0x100012A30	0x00000080	[ 30] _rxbuf_data
+0x100012AB0	0x00000080	[ 30] _process_thread_serial_line_process.buf
+0x100012B30	0x00000004	[ 30] _process_thread_serial_line_process.ptr
+0x100012B40	0x000012C0	[ 31] __link_stats_mem
+0x100013E00	0x0000012C	[ 33] _used_map
+0x100013F2C	0x00000004	[ 33] _num_tables
+0x100013F30	0x00000040	[ 33] _all_tables
+0x100013F70	0x00000130	[ 33] _locked_map
+0x1000140A0	0x00000130	[ 33] _neighbor_addr_mem_memb_used
+0x1000141D0	0x000012C0	[ 33] _neighbor_addr_mem_memb_mem
+0x100015490	0x00000008	[ 33] _nbr_table_keys_list
+0x100015498	0x00000008	[ 34] _ip_processor_list_list
+0x1000154A0	0x00000002	[ 35] _bufptr
+0x1000154A2	0x00000002	[ 35] _buflen
+0x1000154A4	0x0000000C	[ 35] _hdrlen
+0x1000154B0	0x00000080	[ 35] _packetbuf_aligned
+0x100015530	0x00000040	[ 36] _buframmem_memb_used
+0x100015570	0x00002B00	[ 36] _buframmem_memb_mem
+0x100018070	0x00000040	[ 36] _bufmem_memb_used
+0x1000180B0	0x00000200	[ 36] _bufmem_memb_mem
+0x1000182B0	0x00000010	[ 38] _started
+0x1000182C0	0x00000500	[ 38] _databuffer
+0x1000187C0	0x00000020	[ 39] _periodic
+0x1000187E0	0x00002580	[ 40] __ds6_neighbors_mem
+0x10001AD60	0x00000010	[ 41] _defaultroutermemb_memb_used
+0x10001AD70	0x00000060	[ 41] _defaultroutermemb_memb_mem
+0x10001ADD0	0x00000008	[ 41] _defaultrouterlist_list
+0x10001ADE0	0x00000010	[ 42] _default_prefix
+0x10001ADF0	0x00000010	[ 42] _loc_fipaddr
+0x10001AE00	0x00000008	[ 42] _locaddr
+0x10001AE08	0x00000008	[ 42] _locprefix
+0x10001AE10	0x00000008	[ 42] _locmaddr
+0x10001AE18	0x00000008	[ 42] _locaaddr
+0x10001AE20	0x00000010	[ 43] _tmp_ipaddr
+0x10001AE30	0x00000008	[ 43] _input_handler_list_list
+0x10001AE38	0x00000008	[ 43] _echo_reply_callback_list_list
+0x10001AE40	0x00000008	[ 44] _nd6_opt_llao
+0x10001AE48	0x00000008	[ 44] _nd6_opt_offset
+0x10001AE50	0x00000008	[ 44] _nbr
+0x10001AE58	0x00000008	[ 44] _addr
+0x10001AE60	0x00000010	[ 45] _packets_memb_memb_used
+0x10001AE70	0x00000AB0	[ 45] _packets_memb_memb_mem
+0x10001B920	0x00000008	[ 46] _num_nodes
+0x10001B928	0x00000008	[ 46] _nodelist_list
+0x10001B930	0x00000130	[ 46] _nodememb_memb_used
+0x10001BA60	0x00002EE0	[ 46] _nodememb_memb_mem
+0x10001E940	0x00000002	[ 48] _lastport
+0x10001E950	0x00000010	[ 49] _uipbuf_attrs
+0x10001E960	0x00000010	[ 49] _uipbuf_default_attrs
+0x10001E970	0x00000008	[ 51] _rpl_dag_root_set_prefix.initialized
+0x10001E978	0x00000010	[ 51] _set_global_address.root_ipaddr
+0x10001E990	0x000012C0	[ 57] __rpl_neighbors_mem
+0x10001FC50	0x00000040	[ 58] _dis_timer
+0x10001FC90	0x00000040	[ 58] _periodic_timer
+0x10001FCD0	0x00000001	[ 59] _rpl_leaf_only
+0x10001FCE0	0x00000010	[  2] _ring
+0x10001FCF0	0x00000004	[  3] _contiki_argc
+0x10001FCF8	0x00000008	[  5] _button_hal_buttons
+0x10001FD00	0x00000004	[ 16] _curr_log_level_rpl
+0x10001FD04	0x00000004	[ 16] _curr_log_level_tcpip
+0x10001FD08	0x00000004	[ 16] _curr_log_level_ipv6
+0x10001FD0C	0x00000004	[ 16] _curr_log_level_6lowpan
+0x10001FD10	0x00000004	[ 16] _curr_log_level_nullnet
+0x10001FD14	0x00000004	[ 16] _curr_log_level_mac
+0x10001FD18	0x00000004	[ 16] _curr_log_level_framer
+0x10001FD1C	0x00000004	[ 16] _curr_log_level_6top
+0x10001FD20	0x00000004	[ 16] _curr_log_level_coap
+0x10001FD24	0x00000004	[ 16] _curr_log_level_snmp
+0x10001FD28	0x00000004	[ 16] _curr_log_level_lwm2m
+0x10001FD2C	0x00000002	[ 17] _node_id
+0x10001FD30	0x00000008	[ 18] _process_list
+0x10001FD38	0x00000008	[ 18] _process_current
+0x10001FD40	0x00000002	[ 48] _uip_ext_bitmap
+0x10001FD42	0x00000002	[ 48] _uip_ext_len
+0x10001FD44	0x00000001	[ 48] _uip_last_proto
+0x10001FD48	0x00000010	[  2] _miti
+0x10001FD58	0x00000008	[  3] _contiki_argv
+0x10001FD60	0x00000001	[ 26] _button_hal_periodic_event
+0x10001FD61	0x00000001	[ 26] _button_hal_press_event
+0x10001FD62	0x00000001	[ 26] _button_hal_release_event
+0x10001FD63	0x00000001	[ 30] _serial_line_event_message
+0x10001FD68	0x00000040	[ 31] _periodic_timer
+0x10001FDA8	0x00000008	[ 32] _linkaddr_node_addr
+0x10001FDB0	0x00000010	[ 35] _packetbuf_addrs
+0x10001FDC0	0x0000001A	[ 35] _packetbuf_attrs
+0x10001FDDA	0x00000001	[ 39] _tcpip_event
+0x10001FDDB	0x00000001	[ 42] _uip_ds6_addr_size
+0x10001FDE0	0x00000138	[ 42] _uip_ds6_if
+0x10001FF18	0x00000001	[ 42] _uip_ds6_netif_addr_list_offset
+0x10001FF20	0x00000060	[ 42] _uip_ds6_prefix_list
+0x10001FF80	0x00000020	[ 42] _uip_ds6_timer_periodic
+0x10001FFA0	0x00000010	[ 42] _uip_ds6_timer_ra
+0x10001FFB0	0x00000500	[ 48] _uip_aligned_buf
+0x1000204B0	0x00000008	[ 48] _uip_appdata
+0x1000204B8	0x00000008	[ 48] _uip_conn
+0x1000204C0	0x00000001	[ 48] _uip_flags
+0x1000204C2	0x00000002	[ 48] _uip_len
+0x1000204C8	0x00000008	[ 48] _uip_lladdr
+0x1000204D0	0x00000008	[ 48] _uip_sappdata
+0x1000204D8	0x00000002	[ 48] _uip_slen
+0x1000204E0	0x00000008	[ 48] _uip_udp_conn
+0x1000204F0	0x00000140	[ 48] _uip_udp_conns
+0x100020630	0x00000260	[ 52] _curr_instance
+0x100020890	0x00000010	[ 59] _rpl_multicast_addr
