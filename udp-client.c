@@ -3,7 +3,9 @@
 #include "random.h"
 #include "net/netstack.h"
 #include "net/ipv6/simple-udp.h"
-#include "./miti.h"
+#include "miti.h"
+#include "sensors.h"
+#include "pir-sensor.h"
 
 #include "sys/log.h"
 
@@ -17,6 +19,7 @@
 #define SEND_INTERVAL		  (60 * CLOCK_SECOND)
 
 static struct simple_udp_connection udp_conn;
+const struct sensors_sensor button_sensor;
 
 /*---------------------------------------------------------------------------*/
 PROCESS(udp_client_process, "UDP client");
@@ -44,13 +47,15 @@ udp_rx_callback(struct simple_udp_connection *c,
 /*---------------------------------------------------------------------------*/
 PROCESS_THREAD(udp_client_process, ev, data)
 {
-  //static struct etimer periodic_timer;
+  static struct etimer periodic_timer;
   static unsigned count;
   static char str[32];
   uip_ipaddr_t dest_ipaddr;
   struct Miti miti_vars;
   miti_vars.attack = false;
   miti_vars.QoS = .2;
+  miti_vars.pir_sensor = pir_sensor;
+
 
   PROCESS_BEGIN();
 
@@ -58,26 +63,21 @@ PROCESS_THREAD(udp_client_process, ev, data)
   simple_udp_register(&udp_conn, UDP_CLIENT_PORT, NULL,
                       UDP_SERVER_PORT, udp_rx_callback);
 
-  //etimer_set(&periodic_timer, random_rand() % SEND_INTERVAL);
+  etimer_set(&periodic_timer, SEND_INTERVAL);
   while(1) {
-    //PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&periodic_timer));
+      PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&periodic_timer)); // attempt to collect sensor data
+ 
+      if (data == &pir_sensor) {
+        /* Send data to server */
+        LOG_INFO("Sending request %u to ", count);
+        LOG_INFO_6ADDR(&dest_ipaddr);
+        LOG_INFO_("\n");
+        send_wrapper(simple_udp_sendto, &udp_conn, str, strlen(str), &dest_ipaddr, &miti_vars);
+        count++;
+        LOG_INFO("send count: %d\n", count);
+      }
 
-    //if(NETSTACK_ROUTING.node_is_reachable() && NETSTACK_ROUTING.get_root_ipaddr(&dest_ipaddr)) {
-      /* Send to DAG root */
-      LOG_INFO("Sending request %u to ", count);
-      LOG_INFO_6ADDR(&dest_ipaddr);
-      LOG_INFO_("\n");
-      send_wrapper(simple_udp_sendto, &udp_conn, str, strlen(str), &dest_ipaddr, &miti_vars);
-      
-      count++;
-      LOG_INFO("send count: %d\n", count);
-    //} else {
-    //  LOG_INFO("Not reachable yet\n");
-    //}
-
-    /* Add some jitter */
-  //  etimer_set(&periodic_timer, SEND_INTERVAL
-  //    - CLOCK_SECOND + (random_rand() % (2 * CLOCK_SECOND)));
+      etimer_set(&periodic_timer, SEND_INTERVAL);
   }
 
   PROCESS_END();

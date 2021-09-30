@@ -5,13 +5,15 @@
  *
  */
 
-#include <unistd.h>
+//#include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "miti.h"
 #include "sys/log.h"
 #include "netstack.h"
+#include "sensors.h"
+#include "pir-sensor.h"
 
 #define LOG_MODULE "App"
 #define LOG_LEVEL LOG_LEVEL_INFO
@@ -89,7 +91,9 @@ conserve_energy(struct Miti *userVars)
   if ( /*userVars->attack && */ (t > (state.wakePercent) * 10))
   {
     NETSTACK_RADIO.off();
-    sleep(10 - t);  // sleep until next wake period
+    SENSORS_DEACTIVATE(userVars->pir_sensor);
+//    sleep(10 - t);  // sleep until next wake period
+    SENSORS_ACTIVATE(userVars->pir_sensor);
     NETSTACK_RADIO.on();
   }
 
@@ -140,15 +144,19 @@ send_wrapper(int (*send)(simple_udp_connection*, const void*, uint16_t, const ui
 /* 
  * Wrap a sensor device
  */
+
 /*
-static void*
 sense_wrapper(void* (*sense)(struct *vars, **args))
 {
-  if (should_be_awake(userVars)) {
-      void* dataPtr = sense();
-  } else {
-    return (void*) -1; // error code here
-  }
-  return dataPtr;
+  // 1. sleep mode
+  conserve_energy(userVars);
+
+  // 2. wait for sens
+  
+
+  // 3. adjust wakePercent
+  AIMD(userVars);
+
+  return result;
 }
 */

@@ -17,7 +17,8 @@ build/sky/obj/miti.o: miti.c miti.h ../../os/contiki.h \
  ../../os/dev/radio.h ../../os/net/mac/framer/framer.h \
  ../../os/net/ipv6/uip-ds6-route.h ../../os/lib/list.h \
  ../../os/net/ipv6/uip-sr.h ../../os/net/ipv6/simple-udp.h \
- ../../os/sys/log.h ../../os/sys/log-conf.h
+ ../../os/lib/sensors.h ../../os/sys/log.h ../../os/sys/log-conf.h \
+ ../../os/net/netstack.h pir-sensor.h ../../os/lib/sensors.h
 miti.c miti.h ../../os/contiki.h :
  ../../arch/platform/sky/./contiki-conf.h :
  ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h :
@@ -37,4 +38,5 @@ miti.c miti.h ../../os/contiki.h :
  ../../os/dev/radio.h ../../os/net/mac/framer/framer.h :
  ../../os/net/ipv6/uip-ds6-route.h ../../os/lib/list.h :
  ../../os/net/ipv6/uip-sr.h ../../os/net/ipv6/simple-udp.h :
- ../../os/sys/log.h ../../os/sys/log-conf.h :
+ ../../os/lib/sensors.h ../../os/sys/log.h ../../os/sys/log-conf.h :
+ ../../os/net/netstack.h pir-sensor.h ../../os/lib/sensors.h :

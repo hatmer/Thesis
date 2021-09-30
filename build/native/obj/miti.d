@@ -15,7 +15,8 @@ build/native/obj/miti.o: miti.c miti.h ../../os/contiki.h \
   ../../os/net/mac/framer/framer.h ../../os/net/ipv6/uip-packetqueue.h \
   ../../os/net/ipv6/uip-ds6-route.h ../../os/lib/list.h \
   ../../os/net/ipv6/uip-sr.h ../../os/net/ipv6/simple-udp.h \
-  ../../os/sys/log.h ../../os/sys/log-conf.h
+  ../../os/lib/sensors.h ../../os/sys/log.h ../../os/sys/log-conf.h \
+  pir-sensor.h
 miti.c miti.h ../../os/contiki.h :
   ../../arch/platform/native/./contiki-conf.h :
   ../../arch/cpu/native/./native-def.h ../../os/contiki-default-conf.h :
@@ -33,4 +34,5 @@ miti.c miti.h ../../os/contiki.h :
   ../../os/net/mac/framer/framer.h ../../os/net/ipv6/uip-packetqueue.h :
   ../../os/net/ipv6/uip-ds6-route.h ../../os/lib/list.h :
   ../../os/net/ipv6/uip-sr.h ../../os/net/ipv6/simple-udp.h :
-  ../../os/sys/log.h ../../os/sys/log-conf.h :
+  ../../os/lib/sensors.h ../../os/sys/log.h ../../os/sys/log-conf.h :
+  pir-sensor.h :
