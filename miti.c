@@ -15,6 +15,7 @@
 #include "sensors.h"
 #include "pir-sensor.h"
 
+
 #define LOG_MODULE "App"
 #define LOG_LEVEL LOG_LEVEL_INFO
 //#include "net/ipv6/simple-udp.h"
@@ -26,11 +27,18 @@
 /* Tune this value: amount of space in buffer */
 #define BUFFERSIZE 32
 
+// capacitor full amt of energy, amt. of energy used by main loop, amt. energy gained in full sunlight
+double LOOP_ENERGY_USE = 10.0; 
 
+double attackTotal[10] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}; // all energy blocked
+double attackGreenhouse[10] = {5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0}; //gardner blocks 75% of energy
+double attackSatellite[10] = {5.0, 5.0, 5.0, 1.0, 0.0, 1.0, 5.0, 5.0, 5.0}; // satellite blocks the sun
+double FSE = 20.0; // full sun energy
 
 struct State {
   double wakePercent;             // wakePercent >= QoS
   double energy;                  // used to measure how much energy is harvested during an attack
+  int attackTimeIdx;
 };
 
 struct Buffer {
@@ -40,7 +48,7 @@ struct Buffer {
 };
 
 
-struct State state = {.wakePercent = .25, .energy = 0.0};
+struct State state = {.wakePercent = .25, .energy = 100.0, .attackTimeIdx = 0};
 struct Buffer ring = {.bufferHead = 0, .bufferTail = 0};
 
 /**
@@ -71,12 +79,35 @@ get_time()
  * Get the energy percentage from the energy buffer
  * TODO implement
  *
+ * energy attack simulation: 
+ * harvested energy simulation: get_energy returns deterministic energy increases based on attack scenario
+ *
+ * attack scenario: time window (idx * x second periods) + amount of energy gained each round + attack_detection_flag
+ *
+ * 1. get capacitor full charge amt
+ * 2. calculate main loop energy cost
+ * 3. decrement energy lvl each main loop round
+ * 4. if attack ongoing: increase energy lvl according to attack scenario
+ *    else: increase energy lvl by fixed amt (full sunlight)
+ *
+ *    need: capacitor full amt of energy, amt. of energy used by main loop, amt. energy gained in full sunlight
  */
 
+
+
 static double
-get_energy()
+get_energy(struct Miti *userVars)
 {
-  return 100;
+  // update energy level
+  if (userVars->attack) {
+    state.energy += attackTotal[state.attackTimeIdx % 10]; // TODO use different attacks
+    state.attackTimeIdx++;
+  } else {
+    state.energy += FSE;
+    state.attackTimeIdx = 0; // reset
+  }
+  return state.energy;
+
 }
 
 /*
@@ -87,12 +118,17 @@ static void
 conserve_energy(struct Miti *userVars)
 {
   LOG_INFO("checking if should be asleep\n");
-  int t = get_time() % 10;
+  //static struct etimer sleep_timer;
+  int t = get_time();
+  int sleepUntil = t + (t % 10);
   if ( /*userVars->attack && */ (t > (state.wakePercent) * 10))
   {
     NETSTACK_RADIO.off();
     SENSORS_DEACTIVATE(userVars->pir_sensor);
-//    sleep(10 - t);  // sleep until next wake period
+    
+    // sleep until next wake period
+    while (get_time() < sleepUntil){}
+
     SENSORS_ACTIVATE(userVars->pir_sensor);
     NETSTACK_RADIO.on();
   }
@@ -106,7 +142,7 @@ conserve_energy(struct Miti *userVars)
 static void
 AIMD(struct Miti *userVars)
 {
-  double energyConsumed = state.energy - get_energy();
+  double energyConsumed = state.energy - get_energy(userVars);
   if (energyConsumed < 0) { // gained energy: increase wakePercent
     if (state.wakePercent + DELTA <= 1.0) {
       state.wakePercent += DELTA;
@@ -119,7 +155,6 @@ AIMD(struct Miti *userVars)
       state.wakePercent = userVars->QoS;
     }
   }
-  return;
 }
 
 

@@ -67,7 +67,8 @@ PROCESS_THREAD(udp_client_process, ev, data)
   while(1) {
       PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&periodic_timer)); // attempt to collect sensor data
  
-      if (data == &pir_sensor) {
+      if (random_rand() % 2 == 0) { //data == &pir_sensor) {
+        LOG_INFO("client sending\n");
         /* Send data to server */
         LOG_INFO("Sending request %u to ", count);
         LOG_INFO_6ADDR(&dest_ipaddr);
@@ -75,7 +76,7 @@ PROCESS_THREAD(udp_client_process, ev, data)
         send_wrapper(simple_udp_sendto, &udp_conn, str, strlen(str), &dest_ipaddr, &miti_vars);
         count++;
         LOG_INFO("send count: %d\n", count);
-      }
+      } else { LOG_INFO("client not sending this round\n"); }
 
       etimer_set(&periodic_timer, SEND_INTERVAL);
   }
