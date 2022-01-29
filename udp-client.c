@@ -8,6 +8,7 @@
 #include "pir-sensor.h"
 
 #include "sys/log.h"
+#include "energest.h"
 
 #define LOG_MODULE "App"
 #define LOG_LEVEL LOG_LEVEL_INFO
@@ -44,10 +45,17 @@ udp_rx_callback(struct simple_udp_connection *c,
 
 }
 
+static unsigned long
+to_seconds(uint64_t time)
+{
+  return (unsigned long)(time / ENERGEST_SECOND);
+}
+
 /*---------------------------------------------------------------------------*/
 PROCESS_THREAD(udp_client_process, ev, data)
 {
   static struct etimer periodic_timer;
+  static struct etimer sleep_timer;
   static unsigned count;
   static char str[32];
   uip_ipaddr_t dest_ipaddr;
@@ -58,27 +66,69 @@ PROCESS_THREAD(udp_client_process, ev, data)
 
 
   PROCESS_BEGIN();
-
+  
   /* Initialize UDP connection */
   simple_udp_register(&udp_conn, UDP_CLIENT_PORT, NULL,
                       UDP_SERVER_PORT, udp_rx_callback);
 
+
   etimer_set(&periodic_timer, SEND_INTERVAL);
+
+  // Main loop
   while(1) {
-      PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&periodic_timer)); // attempt to collect sensor data
- 
-      if (random_rand() % 2 == 0) { //data == &pir_sensor) {
-        LOG_INFO("client sending\n");
-        /* Send data to server */
-        LOG_INFO("Sending request %u to ", count);
-        LOG_INFO_6ADDR(&dest_ipaddr);
-        LOG_INFO_("\n");
-        send_wrapper(simple_udp_sendto, &udp_conn, str, strlen(str), &dest_ipaddr, &miti_vars);
-        count++;
-        LOG_INFO("send count: %d\n", count);
-      } else { LOG_INFO("client not sending this round\n"); }
+      PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&periodic_timer)); 
+      LOG_INFO("client sending\n");
+      
+      /* Send data to server */
+      LOG_INFO("Sending request %u to ", count);
+      LOG_INFO_6ADDR(&dest_ipaddr);
+      LOG_INFO_("\n");
+      
+      /* Attack mitigation */
+      LOG_INFO("checking if should be asleep\n");
+      int t = get_time();
+      printf("time is %d\n", t);
+      if ( /*userVars->attack && */ ((t % 100) / 10) > (/*state.wakePercent*/ .2 * 10))
+      {
+        int sleepTime = 10 - ((t % 100) / 10);
+        printf("sleeping until: %d\n", sleepTime);
+        LOG_INFO("sleeping\n");
+        // NETSTACK_RADIO.off();
+        SENSORS_DEACTIVATE(pir_sensor);
+
+        // sleep until next wake period
+        printf("sleep for %d\n", sleepTime);
+        etimer_set(&sleep_timer, sleepTime*CLOCK_SECOND); // *1000 for real-time
+        PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&sleep_timer));
+
+        LOG_INFO("waking up\n");
+        SENSORS_ACTIVATE(pir_sensor);
+        // NETSTACK_RADIO.on();
+      }
+
+
+      simple_udp_sendto(&udp_conn, str, strlen(str), &dest_ipaddr);
+      
+      send_wrapper(simple_udp_sendto, &udp_conn, str, strlen(str), &dest_ipaddr, &miti_vars);
+      count++;
+      LOG_INFO("send complete. send count: %d\n", count);
 
       etimer_set(&periodic_timer, SEND_INTERVAL);
+
+      energest_flush();
+      printf("\nEnergest:\n");
+      printf(" CPU     %4lus LPM     %4lus DEEP LPM %lus   Total time %lus\n",
+          to_seconds(energest_type_time(ENERGEST_TYPE_CPU)),
+          to_seconds(energest_type_time(ENERGEST_TYPE_LPM)),
+          to_seconds(energest_type_time(ENERGEST_TYPE_DEEP_LPM)),
+          to_seconds(ENERGEST_GET_TOTAL_TIME()));
+      printf(" Radio LISTEN %4lus TRANSMIT %4lus OFF      %4lus\n",
+           to_seconds(energest_type_time(ENERGEST_TYPE_LISTEN)),
+           to_seconds(energest_type_time(ENERGEST_TYPE_TRANSMIT)),
+           to_seconds(ENERGEST_GET_TOTAL_TIME()
+                      - energest_type_time(ENERGEST_TYPE_TRANSMIT)
+                      - energest_type_time(ENERGEST_TYPE_LISTEN)));
+
   }
 
   PROCESS_END();

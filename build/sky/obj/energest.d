@@ -1,5 +1,5 @@
-build/sky/obj/energest.o: ../../os/sys/energest.c ../../os/contiki.h \
- ../../arch/platform/sky/./contiki-conf.h \
+build/sky/obj/energest.o: energest.c ../../os/contiki.h \
+ ../../arch/platform/sky/./contiki-conf.h project-conf.h \
  ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h \
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h \
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h \
@@ -9,8 +9,8 @@ build/sky/obj/energest.o: ../../os/sys/energest.c ../../os/contiki.h \
  ../../os/sys/etimer.h ../../os/sys/rtimer.h ../../os/dev/watchdog.h \
  ../../arch/cpu/msp430/./rtimer-arch.h ../../os/sys/rtimer.h \
  ../../os/sys/pt.h ../../os/sys/clock.h ../../os/sys/energest.h
-../../os/sys/energest.c ../../os/contiki.h :
- ../../arch/platform/sky/./contiki-conf.h :
+energest.c ../../os/contiki.h :
+ ../../arch/platform/sky/./contiki-conf.h project-conf.h :
  ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h :
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h :
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h :

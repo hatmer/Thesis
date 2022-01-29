@@ -1,5 +1,5 @@
 build/sky/obj/miti.o: miti.c miti.h ../../os/contiki.h \
- ../../arch/platform/sky/./contiki-conf.h \
+ ../../arch/platform/sky/./contiki-conf.h project-conf.h \
  ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h \
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h \
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h \
@@ -20,7 +20,7 @@ build/sky/obj/miti.o: miti.c miti.h ../../os/contiki.h \
  ../../os/lib/sensors.h ../../os/sys/log.h ../../os/sys/log-conf.h \
  ../../os/net/netstack.h pir-sensor.h ../../os/lib/sensors.h
 miti.c miti.h ../../os/contiki.h :
- ../../arch/platform/sky/./contiki-conf.h :
+ ../../arch/platform/sky/./contiki-conf.h project-conf.h :
  ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h :
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h :
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h :

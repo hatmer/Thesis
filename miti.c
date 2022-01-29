@@ -67,11 +67,11 @@ init()
  * precision timing measurements.
  */
 
-static int
+int
 get_time()
 {
-  int time = (int)clock_seconds();
-  LOG_INFO("get_time: %d\n", time);
+   int time = (int)clock_seconds();
+  //LOG_INFO("get_time: %d\n", time);
    return time;
 }
 
@@ -114,26 +114,34 @@ get_energy(struct Miti *userVars)
  * Determine if device should be in wake mode
  *
  */
+/*
 static void
 conserve_energy(struct Miti *userVars)
 {
   LOG_INFO("checking if should be asleep\n");
   //static struct etimer sleep_timer;
   int t = get_time();
-  int sleepUntil = t + (t % 10);
-  if ( /*userVars->attack && */ (t > (state.wakePercent) * 10))
+  printf("time is %d\n", t);
+  printf("test: %d\n", ((t % 100) / 10));
+  
+  if ( userVars->attack &&  ((t % 100) / 10) > (state.wakePercent * 10))
   {
-    NETSTACK_RADIO.off();
-    SENSORS_DEACTIVATE(userVars->pir_sensor);
+    int sleepUntil = t + (10 - ((t % 100) / 10))*1000;
+    printf("sleeping until: %d\n", sleepUntil);
+    LOG_INFO("sleeping\n");
+    //NETSTACK_RADIO.off();
+    //SENSORS_DEACTIVATE(userVars->pir_sensor);
     
     // sleep until next wake period
+    printf("busy sleep for %d\n", sleepUntil - get_time());
     while (get_time() < sleepUntil){}
 
-    SENSORS_ACTIVATE(userVars->pir_sensor);
-    NETSTACK_RADIO.on();
+    LOG_INFO("waking up\n");
+    //SENSORS_ACTIVATE(userVars->pir_sensor);
+    //NETSTACK_RADIO.on();
   }
-
 }
+*/
 
 /*
  * Update QoS (wakePercent)
@@ -165,10 +173,10 @@ int
 send_wrapper(int (*send)(simple_udp_connection*, const void*, uint16_t, const uip_ipaddr_t*), simple_udp_connection* udp_conn, const void* str, uint16_t length, const uip_ipaddr_t*dest_ipaddr, Miti *userVars)
 {
   // 1. sleep mode
-  conserve_energy(userVars);
+//  conserve_energy(userVars);
 
   // 2. wake mode
-  send(udp_conn, str, length, dest_ipaddr);
+  //send(udp_conn, str, length, dest_ipaddr);
 
   // 3. AIMD adjustment to state.wakePercent
   AIMD(userVars);
