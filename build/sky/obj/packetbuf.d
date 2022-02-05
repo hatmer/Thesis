@@ -1,6 +1,6 @@
 build/sky/obj/packetbuf.o: ../../os/net/packetbuf.c \
  ../../os/contiki-net.h ../../os/contiki.h \
- ../../arch/platform/sky/./contiki-conf.h \
+ ../../arch/platform/sky/./contiki-conf.h project-conf.h \
  ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h \
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h \
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h \
@@ -37,7 +37,7 @@ build/sky/obj/packetbuf.o: ../../os/net/packetbuf.c \
  ../../os/net/mac/csma/csma-security.h ../../os/net/mac/tsch/tsch-conf.h
 ../../os/net/packetbuf.c :
  ../../os/contiki-net.h ../../os/contiki.h :
- ../../arch/platform/sky/./contiki-conf.h :
+ ../../arch/platform/sky/./contiki-conf.h project-conf.h :
  ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h :
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h :
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h :

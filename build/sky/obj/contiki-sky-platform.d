@@ -1,7 +1,7 @@
 build/sky/obj/contiki-sky-platform.o: \
  ../../arch/platform/sky/./contiki-sky-platform.c \
  ../../os/dev/button-sensor.h ../../os/lib/sensors.h ../../os/contiki.h \
- ../../arch/platform/sky/./contiki-conf.h \
+ ../../arch/platform/sky/./contiki-conf.h project-conf.h \
  ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h \
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h \
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h \
@@ -13,7 +13,7 @@ build/sky/obj/contiki-sky-platform.o: \
  ../../os/sys/pt.h ../../os/sys/clock.h
  ../../arch/platform/sky/./contiki-sky-platform.c :
  ../../os/dev/button-sensor.h ../../os/lib/sensors.h ../../os/contiki.h :
- ../../arch/platform/sky/./contiki-conf.h :
+ ../../arch/platform/sky/./contiki-conf.h project-conf.h :
  ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h :
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h :
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h :

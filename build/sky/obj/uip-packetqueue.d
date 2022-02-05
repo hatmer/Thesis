@@ -1,6 +1,6 @@
 build/sky/obj/uip-packetqueue.o: ../../os/net/ipv6/uip-packetqueue.c \
  ../../os/net/ipv6/uip.h ../../os/net/ipv6/uipopt.h ../../os/contiki.h \
- ../../arch/platform/sky/./contiki-conf.h \
+ ../../arch/platform/sky/./contiki-conf.h project-conf.h \
  ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h \
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h \
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h \
@@ -14,7 +14,7 @@ build/sky/obj/uip-packetqueue.o: ../../os/net/ipv6/uip-packetqueue.c \
  ../../os/net/ipv6/uip-packetqueue.h ../../os/sys/ctimer.h
 ../../os/net/ipv6/uip-packetqueue.c :
  ../../os/net/ipv6/uip.h ../../os/net/ipv6/uipopt.h ../../os/contiki.h :
- ../../arch/platform/sky/./contiki-conf.h :
+ ../../arch/platform/sky/./contiki-conf.h project-conf.h :
  ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h :
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h :
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h :

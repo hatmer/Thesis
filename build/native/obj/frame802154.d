@@ -1,6 +1,6 @@
 build/native/obj/frame802154.o: ../../os/net/mac/framer/frame802154.c \
   ../../os/sys/cc.h ../../os/contiki.h \
-  ../../arch/platform/native/./contiki-conf.h \
+  ../../arch/platform/native/./contiki-conf.h project-conf.h \
   ../../arch/cpu/native/./native-def.h ../../os/contiki-default-conf.h \
   ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h \
   ../../os/sys/lc-switch.h ../../os/sys/autostart.h ../../os/sys/timer.h \
@@ -13,7 +13,7 @@ build/native/obj/frame802154.o: ../../os/net/mac/framer/frame802154.c \
   ../../os/net/ipv6/tcpip.h
 ../../os/net/mac/framer/frame802154.c :
   ../../os/sys/cc.h ../../os/contiki.h :
-  ../../arch/platform/native/./contiki-conf.h :
+  ../../arch/platform/native/./contiki-conf.h project-conf.h :
   ../../arch/cpu/native/./native-def.h ../../os/contiki-default-conf.h :
   ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h :
   ../../os/sys/lc-switch.h ../../os/sys/autostart.h ../../os/sys/timer.h :

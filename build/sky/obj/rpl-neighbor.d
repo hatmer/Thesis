@@ -1,6 +1,6 @@
 build/sky/obj/rpl-neighbor.o: \
  ../../os/net/routing/rpl-lite/rpl-neighbor.c ../../os/contiki.h \
- ../../arch/platform/sky/./contiki-conf.h \
+ ../../arch/platform/sky/./contiki-conf.h project-conf.h \
  ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h \
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h \
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h \
@@ -35,7 +35,7 @@ build/sky/obj/rpl-neighbor.o: \
  ../../os/net/routing/rpl-lite/rpl-timers.h ../../os/net/link-stats.h \
  ../../os/net/ipv6/uiplib.h ../../os/sys/log.h ../../os/sys/log-conf.h
  ../../os/net/routing/rpl-lite/rpl-neighbor.c ../../os/contiki.h :
- ../../arch/platform/sky/./contiki-conf.h :
+ ../../arch/platform/sky/./contiki-conf.h project-conf.h :
  ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h :
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h :
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h :

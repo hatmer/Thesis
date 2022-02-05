@@ -1,6 +1,6 @@
 /**
  * Attack Mitigation system for energy harvesting intermittent devices
- * 
+ *
  * Author: Hannah Atmer <email>
  *
  */
@@ -12,35 +12,29 @@
 #include "miti.h"
 #include "sys/log.h"
 #include "netstack.h"
-#include "sensors.h"
-#include "pir-sensor.h"
-
+#include <stdlib.h>
 
 #define LOG_MODULE "App"
 #define LOG_LEVEL LOG_LEVEL_INFO
 //#include "net/ipv6/simple-udp.h"
 
-//typedef struct simple_udp_connection simple_udp_connection
-
-/* Tune this value: amount for additive increase */
-#define DELTA 2 
-/* Tune this value: amount of space in buffer */
-#define BUFFERSIZE 32
 
 // capacitor full amt of energy, amt. of energy used by main loop, amt. energy gained in full sunlight
-double LOOP_ENERGY_USE = 10.0; 
+
+/*
+double LOOP_ENERGY_USE = 10.0;
 
 double attackTotal[10] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}; // all energy blocked
 double attackGreenhouse[10] = {5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0}; //gardner blocks 75% of energy
 double attackSatellite[10] = {5.0, 5.0, 5.0, 1.0, 0.0, 1.0, 5.0, 5.0, 5.0}; // satellite blocks the sun
 double FSE = 20.0; // full sun energy
-
+*/
 struct State {
   double wakePercent;             // wakePercent >= QoS
   double energy;                  // used to measure how much energy is harvested during an attack
   int attackTimeIdx;
 };
-
+/*
 struct Buffer {
   const void ** buffer;       // only used by network device
   int bufferHead;             // points to head of ring.buffer
@@ -50,18 +44,18 @@ struct Buffer {
 
 struct State state = {.wakePercent = .25, .energy = 100.0, .attackTimeIdx = 0};
 struct Buffer ring = {.bufferHead = 0, .bufferTail = 0};
-
+*/
 /**
  * Proceedures
  */
-
+/*
 void
 init()
 {
   ring.buffer = malloc(sizeof(void*)*BUFFERSIZE);
   return;
 }
-
+*/
 /**
  * Get the time in seconds since some arbitrary point. Used for high
  * precision timing measurements.
@@ -70,7 +64,7 @@ init()
 int
 get_time()
 {
-   int time = (int)clock_seconds();
+   int time = abs((int)clock_seconds());
   //LOG_INFO("get_time: %d\n", time);
    return time;
 }
@@ -79,7 +73,7 @@ get_time()
  * Get the energy percentage from the energy buffer
  * TODO implement
  *
- * energy attack simulation: 
+ * energy attack simulation:
  * harvested energy simulation: get_energy returns deterministic energy increases based on attack scenario
  *
  * attack scenario: time window (idx * x second periods) + amount of energy gained each round + attack_detection_flag
@@ -94,7 +88,7 @@ get_time()
  */
 
 
-
+/*
 static double
 get_energy(struct Miti *userVars)
 {
@@ -109,7 +103,7 @@ get_energy(struct Miti *userVars)
   return state.energy;
 
 }
-
+*/
 /*
  * Determine if device should be in wake mode
  *
@@ -123,7 +117,7 @@ conserve_energy(struct Miti *userVars)
   int t = get_time();
   printf("time is %d\n", t);
   printf("test: %d\n", ((t % 100) / 10));
-  
+
   if ( userVars->attack &&  ((t % 100) / 10) > (state.wakePercent * 10))
   {
     int sleepUntil = t + (10 - ((t % 100) / 10))*1000;
@@ -131,7 +125,7 @@ conserve_energy(struct Miti *userVars)
     LOG_INFO("sleeping\n");
     //NETSTACK_RADIO.off();
     //SENSORS_DEACTIVATE(userVars->pir_sensor);
-    
+
     // sleep until next wake period
     printf("busy sleep for %d\n", sleepUntil - get_time());
     while (get_time() < sleepUntil){}
@@ -146,7 +140,7 @@ conserve_energy(struct Miti *userVars)
 /*
  * Update QoS (wakePercent)
  */
-
+/*
 static void
 AIMD(struct Miti *userVars)
 {
@@ -164,11 +158,12 @@ AIMD(struct Miti *userVars)
     }
   }
 }
-
+*/
 
 /**
  * Wrap a network device
  */
+/*
 int
 send_wrapper(int (*send)(simple_udp_connection*, const void*, uint16_t, const uip_ipaddr_t*), simple_udp_connection* udp_conn, const void* str, uint16_t length, const uip_ipaddr_t*dest_ipaddr, Miti *userVars)
 {
@@ -183,8 +178,8 @@ send_wrapper(int (*send)(simple_udp_connection*, const void*, uint16_t, const ui
 
   return 0;
 }
-
-/* 
+*/
+/*
  * Wrap a sensor device
  */
 
@@ -195,7 +190,7 @@ sense_wrapper(void* (*sense)(struct *vars, **args))
   conserve_energy(userVars);
 
   // 2. wait for sens
-  
+
 
   // 3. adjust wakePercent
   AIMD(userVars);

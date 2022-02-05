@@ -1,7 +1,7 @@
 build/native/obj/ip64-addr.o: ../../os/net/ipv6/ip64-addr.c \
   ../../os/net/ipv6/ip64-addr.h ../../os/net/ipv6/uip.h \
   ../../os/net/ipv6/uipopt.h ../../os/contiki.h \
-  ../../arch/platform/native/./contiki-conf.h \
+  ../../arch/platform/native/./contiki-conf.h project-conf.h \
   ../../arch/cpu/native/./native-def.h ../../os/contiki-default-conf.h \
   ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h \
   ../../os/sys/lc-switch.h ../../os/sys/cc.h ../../os/sys/cc-gcc.h \
@@ -13,7 +13,7 @@ build/native/obj/ip64-addr.o: ../../os/net/ipv6/ip64-addr.c \
 ../../os/net/ipv6/ip64-addr.c :
   ../../os/net/ipv6/ip64-addr.h ../../os/net/ipv6/uip.h :
   ../../os/net/ipv6/uipopt.h ../../os/contiki.h :
-  ../../arch/platform/native/./contiki-conf.h :
+  ../../arch/platform/native/./contiki-conf.h project-conf.h :
   ../../arch/cpu/native/./native-def.h ../../os/contiki-default-conf.h :
   ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h :
   ../../os/sys/lc-switch.h ../../os/sys/cc.h ../../os/sys/cc-gcc.h :

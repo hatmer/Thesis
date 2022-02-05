@@ -1,6 +1,7 @@
 build/sky/obj/sicslowpan.o: ../../os/net/ipv6/sicslowpan.c \
  ../../os/contiki.h ../../arch/platform/sky/./contiki-conf.h \
- ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h \
+ project-conf.h ../../arch/platform/sky/./sky-def.h \
+ ../../arch/cpu/msp430/./msp430-def.h \
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h \
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h \
  ../../os/sys/lc-switch.h ../../os/sys/cc.h ../../os/sys/cc-gcc.h \
@@ -30,7 +31,8 @@ build/sky/obj/sicslowpan.o: ../../os/net/ipv6/sicslowpan.c \
  ../../os/net/ipv6/uip-sr.h ../../os/sys/log.h ../../os/sys/log-conf.h
 ../../os/net/ipv6/sicslowpan.c :
  ../../os/contiki.h ../../arch/platform/sky/./contiki-conf.h :
- ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h :
+ project-conf.h ../../arch/platform/sky/./sky-def.h :
+ ../../arch/cpu/msp430/./msp430-def.h :
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h :
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h :
  ../../os/sys/lc-switch.h ../../os/sys/cc.h ../../os/sys/cc-gcc.h :

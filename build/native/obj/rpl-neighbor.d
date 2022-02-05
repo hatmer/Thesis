@@ -1,6 +1,6 @@
 build/native/obj/rpl-neighbor.o: \
   ../../os/net/routing/rpl-lite/rpl-neighbor.c ../../os/contiki.h \
-  ../../arch/platform/native/./contiki-conf.h \
+  ../../arch/platform/native/./contiki-conf.h project-conf.h \
   ../../arch/cpu/native/./native-def.h ../../os/contiki-default-conf.h \
   ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h \
   ../../os/sys/lc-switch.h ../../os/sys/cc.h ../../os/sys/cc-gcc.h \
@@ -33,7 +33,7 @@ build/native/obj/rpl-neighbor.o: \
   ../../os/net/routing/rpl-lite/rpl-timers.h ../../os/net/link-stats.h \
   ../../os/net/ipv6/uiplib.h ../../os/sys/log.h ../../os/sys/log-conf.h
   ../../os/net/routing/rpl-lite/rpl-neighbor.c ../../os/contiki.h :
-  ../../arch/platform/native/./contiki-conf.h :
+  ../../arch/platform/native/./contiki-conf.h project-conf.h :
   ../../arch/cpu/native/./native-def.h ../../os/contiki-default-conf.h :
   ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h :
   ../../os/sys/lc-switch.h ../../os/sys/cc.h ../../os/sys/cc-gcc.h :

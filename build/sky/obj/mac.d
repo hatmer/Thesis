@@ -1,6 +1,7 @@
 build/sky/obj/mac.o: ../../os/net/mac/mac.c ../../os/net/mac/mac.h \
  ../../os/contiki.h ../../arch/platform/sky/./contiki-conf.h \
- ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h \
+ project-conf.h ../../arch/platform/sky/./sky-def.h \
+ ../../arch/cpu/msp430/./msp430-def.h \
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h \
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h \
  ../../os/sys/lc-switch.h ../../os/sys/cc.h ../../os/sys/cc-gcc.h \
@@ -14,7 +15,8 @@ build/sky/obj/mac.o: ../../os/net/mac/mac.c ../../os/net/mac/mac.h \
  ../../os/net/ipv6/uipbuf.h ../../os/net/ipv6/tcpip.h
 ../../os/net/mac/mac.c ../../os/net/mac/mac.h :
  ../../os/contiki.h ../../arch/platform/sky/./contiki-conf.h :
- ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h :
+ project-conf.h ../../arch/platform/sky/./sky-def.h :
+ ../../arch/cpu/msp430/./msp430-def.h :
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h :
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h :
  ../../os/sys/lc-switch.h ../../os/sys/cc.h ../../os/sys/cc-gcc.h :

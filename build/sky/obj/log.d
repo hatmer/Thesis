@@ -1,6 +1,6 @@
 build/sky/obj/log.o: ../../os/sys/log.c ../../os/sys/log.h \
  ../../os/net/linkaddr.h ../../os/contiki.h \
- ../../arch/platform/sky/./contiki-conf.h \
+ ../../arch/platform/sky/./contiki-conf.h project-conf.h \
  ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h \
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h \
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h \
@@ -16,7 +16,7 @@ build/sky/obj/log.o: ../../os/sys/log.c ../../os/sys/log.h \
  ../../os/services/deployment/deployment.h ../../os/sys/node-id.h
 ../../os/sys/log.c ../../os/sys/log.h :
  ../../os/net/linkaddr.h ../../os/contiki.h :
- ../../arch/platform/sky/./contiki-conf.h :
+ ../../arch/platform/sky/./contiki-conf.h project-conf.h :
  ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h :
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h :
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h :

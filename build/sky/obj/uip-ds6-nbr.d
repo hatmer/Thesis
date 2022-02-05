@@ -1,7 +1,8 @@
 build/sky/obj/uip-ds6-nbr.o: ../../os/net/ipv6/uip-ds6-nbr.c \
  ../../os/lib/list.h ../../os/net/link-stats.h ../../os/net/linkaddr.h \
  ../../os/contiki.h ../../arch/platform/sky/./contiki-conf.h \
- ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h \
+ project-conf.h ../../arch/platform/sky/./sky-def.h \
+ ../../arch/cpu/msp430/./msp430-def.h \
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h \
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h \
  ../../os/sys/lc-switch.h ../../os/sys/cc.h ../../os/sys/cc-gcc.h \
@@ -29,7 +30,8 @@ build/sky/obj/uip-ds6-nbr.o: ../../os/net/ipv6/uip-ds6-nbr.c \
 ../../os/net/ipv6/uip-ds6-nbr.c :
  ../../os/lib/list.h ../../os/net/link-stats.h ../../os/net/linkaddr.h :
  ../../os/contiki.h ../../arch/platform/sky/./contiki-conf.h :
- ../../arch/platform/sky/./sky-def.h ../../arch/cpu/msp430/./msp430-def.h :
+ project-conf.h ../../arch/platform/sky/./sky-def.h :
+ ../../arch/cpu/msp430/./msp430-def.h :
  ../../arch/cpu/msp430/./msp430-conf.h ../../os/contiki-default-conf.h :
  ../../os/sys/process.h ../../os/sys/pt.h ../../os/sys/lc.h :
  ../../os/sys/lc-switch.h ../../os/sys/cc.h ../../os/sys/cc-gcc.h :
