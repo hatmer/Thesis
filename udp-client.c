@@ -14,9 +14,9 @@
 #define UDP_CLIENT_PORT	8765
 #define UDP_SERVER_PORT	5678
 
-#define SEND_INTERVAL		  (6 * CLOCK_SECOND) // Application sends a message every X seconds
-#define attack_start      (6 * CLOCK_SECOND) // Attack starts after X seconds
-#define attack_duration   (24 * CLOCK_SECOND)
+#define SEND_INTERVAL		  (60 * CLOCK_SECOND) // Application sends a message every X seconds
+#define attack_start      (65 * CLOCK_SECOND) // Attack starts after X seconds
+#define attack_duration   (240 * CLOCK_SECOND)
 
 #define MITI 1
 
@@ -28,7 +28,7 @@ static unsigned long tmp_energy = 0;
 static unsigned long total_time = 0;
 static unsigned long tmp_time = 0;
 static unsigned long rmv_time = 0;
-static unsigned long last_cpu_reading, last_radio_transmit_reading, last_radio_listen_reading, last_lpm_reading;
+static unsigned long last_cpu_reading, last_radio_transmit_reading, last_radio_listen_reading, last_lpm_reading, prev_time;
 
 #ifdef MITI
 static bool attack_ongoing = true;
@@ -39,10 +39,10 @@ int delta = 10;
 
 static bool firstrun = true;
 // energy (u joules) used per 10 milliseconds
-unsigned long harvestable = 3; // amount of harvestable energy per 10 milliseconds during attack
-unsigned long cpu_s_energy = 4; // amount of energy (mu amps) used by 10 cpu millisecond
-unsigned long radio_s_transmit_energy = 85; // (about 34 u joules per transmission) amount of energy used by a radio transmit millisecond
-unsigned long radio_s_listen_energy = 85; // amount of energy used by a radio listen 10 millisecond
+unsigned long harvestable = 200; // amount of harvestable energy per 10 milliseconds during attack
+unsigned long cpu_s_energy = 12; // amount of energy (mu amps) used by 10 cpu millisecond
+unsigned long radio_s_transmit_energy = 275; // (about 34 u joules per transmission) amount of energy used by a radio transmit millisecond
+unsigned long radio_s_listen_energy = 275; // amount of energy used by a radio listen 10 millisecond
 unsigned long lpm_energy = 0; //.15; // LPM3
 
 //unsigned long starting_energies[10] = {22, 45, 67, 90, 112, 135, 157, 180, 202, 225}; // u Joules
@@ -67,17 +67,25 @@ void update_energy()
   energy = energy - ((to_milli_seconds(energest_type_time(ENERGEST_TYPE_CPU)) - last_cpu_reading)*cpu_s_energy);
   last_cpu_reading = to_milli_seconds(energest_type_time(ENERGEST_TYPE_CPU));
   printf("last cpu reading: %lu\n", last_cpu_reading);
-  printf("energy is now %lu\n", energy);
   energy = energy - ((to_milli_seconds(energest_type_time(ENERGEST_TYPE_TRANSMIT)) - last_radio_transmit_reading)*radio_s_transmit_energy);
   last_radio_transmit_reading = to_milli_seconds(energest_type_time(ENERGEST_TYPE_TRANSMIT));
   printf("last radio transmit reading: %lu\n", last_radio_transmit_reading);
+
   energy = energy - ((to_milli_seconds(energest_type_time(ENERGEST_TYPE_LISTEN)) - last_radio_listen_reading)*radio_s_listen_energy);
   last_radio_listen_reading = to_milli_seconds(energest_type_time(ENERGEST_TYPE_LISTEN));
   printf("last radio listen reading: %lu\n", last_radio_listen_reading);
   energy = energy - ((to_milli_seconds(energest_type_time(ENERGEST_TYPE_LPM)) - last_lpm_reading)*lpm_energy);
   last_lpm_reading = to_milli_seconds(energest_type_time(ENERGEST_TYPE_LPM));
 
+  prev_time = total_time;
   total_time = to_milli_seconds(ENERGEST_GET_TOTAL_TIME());
+
+  energy = energy + (total_time - prev_time) * harvestable;
+  if (energy > starting_energy) {
+    if (energy < 400000000) { 
+      energy = starting_energy;
+    }
+  }
 
   printf("energy after update %lu\n", energy);
 }
@@ -112,20 +120,18 @@ PROCESS_THREAD(udp_client_process, ev, data)
                       UDP_SERVER_PORT, udp_rx_callback);
 
   while(1) {
-#ifdef MITI
     if (firstrun) {
+      NETSTACK_RADIO.off();
       energy = energy + (4*85); // 40 milliseconds of radio listen...?
       firstrun = false;
     }
+#ifdef MITI
     //update_energy();
     // mitigate energy attack
     if (attack_ongoing) {
-      //printf("M: sleeping\n");
-      NETSTACK_RADIO.off();
       printf("M: sleep for %d\n", off_seconds);
       etimer_set(&sleep_timer, off_seconds * CLOCK_SECOND);
       PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&sleep_timer));
-      //NETSTACK_RADIO.on();
       printf("M: waking\n");
       // energy is critically low -> MD
       // rest of the time do AI
@@ -167,6 +173,7 @@ PROCESS_THREAD(udp_client_process, ev, data)
       printf("C: Sending request %u to server\n", count);
       snprintf(str, sizeof(str), "hello %d", count);
       simple_udp_sendto(&udp_conn, str, strlen(str), &dest_ipaddr);
+      NETSTACK_RADIO.off();
       count++;
     } else {
       printf("C: Not reachable yet\n");
