@@ -28,10 +28,10 @@
 unsigned long starting_energy = 225;
 static unsigned long energy = 225; // energy buffer level
 static unsigned long total_time = 0;
-static unsigned long rmv_time = 0;
+//static unsigned long rmv_time = 0;
 static unsigned long last_cpu_reading, /*last_radio_transmit_reading, last_radio_listen_reading,*/ last_lpm_reading, prev_time;
-static unsigned long tmp_time = 0;
-static unsigned long tmp_energy = 0;
+//static unsigned long tmp_time = 0;
+//static unsigned long tmp_energy = 0;
 
 #ifdef MITI
 static bool attack_ongoing = true;
@@ -65,29 +65,24 @@ PROCESS(udp_client_process, "Demo Application (UDP client)");
 AUTOSTART_PROCESSES(&udp_client_process);
 /*---------------------------------------------------------------------------*/
 
-void update_energy(bool show)
+void update_energy(bool radio)
 {
   /*********** update energy level *************/
   energest_flush();
-  if (show)
-    printf("******** Updating Energy ********* \nenergy before update %lu\n", energy);
+  
+  printf("******** Updating Energy ********* \nenergy before update %lu\n", energy);
 
   energy = energy - ((to_centi_seconds(energest_type_time(ENERGEST_TYPE_CPU)) - last_cpu_reading)*cpu_s_energy);
-  if (show)
-    printf("cpu: %lu ms\n", (to_centi_seconds(energest_type_time(ENERGEST_TYPE_CPU)) - last_cpu_reading)*10);
-  last_cpu_reading = to_centi_seconds(energest_type_time(ENERGEST_TYPE_CPU));
-  /*
-  energy = energy - ((to_centi_seconds(energest_type_time(ENERGEST_TYPE_TRANSMIT)) - last_radio_transmit_reading)*radio_s_transmit_energy);
-  if (show)
-    printf("radio transmit: %lu ms\n", (to_centi_seconds(energest_type_time(ENERGEST_TYPE_TRANSMIT)) - last_radio_transmit_reading) * 10);
-  last_radio_transmit_reading = to_centi_seconds(energest_type_time(ENERGEST_TYPE_TRANSMIT));
-*/
-  /* Ignore Listen time for now since it is too high */
-  //energy = energy - ((to_centi_seconds(energest_type_time(ENERGEST_TYPE_LISTEN)) - last_radio_listen_reading)*radio_s_listen_energy);
-  //if (show)
-  //  printf("radio listen: %lu ms\n", (to_centi_seconds(energest_type_time(ENERGEST_TYPE_LISTEN)) - last_radio_listen_reading)*10);
-  //last_radio_listen_reading = to_centi_seconds(energest_type_time(ENERGEST_TYPE_LISTEN));
   
+  printf("cpu: %lu ms\n", (to_centi_seconds(energest_type_time(ENERGEST_TYPE_CPU)) - last_cpu_reading)*10);
+  
+  last_cpu_reading = to_centi_seconds(energest_type_time(ENERGEST_TYPE_CPU));
+  
+  if (radio) {
+    // TODO listened for x milliseconds
+    // transmitted for 3.3 milliseconds
+    energy = energy - (radio_s_listen_energy / 3);
+  }
 
   energy = energy - ((to_centi_seconds(energest_type_time(ENERGEST_TYPE_LPM)) - last_lpm_reading)*lpm_energy);
   last_lpm_reading = to_centi_seconds(energest_type_time(ENERGEST_TYPE_LPM));
@@ -95,19 +90,16 @@ void update_energy(bool show)
   prev_time = total_time;
   total_time = to_centi_seconds(ENERGEST_GET_TOTAL_TIME());
 
-  // 
   energy = energy + ((total_time - prev_time) * harvestable);
   if (energy > starting_energy) {
     if (energy < 400000000) { 
       energy = starting_energy;
     }
   }
-  if (show) {
   if (energy > 400000) {
     printf("energy after update: -%lu uJoules\n", ULONG_MAX-energy);
   } else {
     printf("energy after update: %lu uJoules\n",energy);
-  }
   }
 }
 
@@ -121,12 +113,8 @@ PROCESS_THREAD(udp_client_process, ev, data)
 #endif
   static unsigned count;
   static char str[32];
-  uip_ipaddr_t dest_ipaddr;
 
   PROCESS_BEGIN();
-
-  //conn = udp_new(NULL, 0, NULL); 
-  //udp_bind(conn, UDP_CLIENT_PORT);
 
   while(1) {
 #ifdef MITI
@@ -145,53 +133,23 @@ PROCESS_THREAD(udp_client_process, ev, data)
         }
       }
     }
-    //update_energy(true);
-    //tmp_energy = energy;
     if (energy > 400000) {
     printf("energy after doze: -%lu uJoules\n", ULONG_MAX-energy);
   } else {
     printf("energy after doze: %lu uJoules\n",energy);
   }
 #endif
-    //tmp_time = total_time;
     // application naturally sleeps for X seconds before doing anything
     printf("========= application sleeping for %lu seconds =======\n", SEND_INTERVAL);
     etimer_set(&periodic_timer, SEND_INTERVAL);
     PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&periodic_timer));
-    update_energy(true);
-
-    //NETSTACK_RADIO.on();
-    // Simulation: wait for netstack to turn back on. Otherwise packet sometimes isn't sent. This wait is "as if it didn't happen" and is only part of the simulation.
-   /* printf("==== simulation waiting for netstack to turn back on =======\n");
-    etimer_set(&periodic_timer, SEND_INTERVAL);
-    PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&periodic_timer));
     update_energy(false);
-    energy = tmp_energy;
-    rmv_time = rmv_time + (total_time-tmp_time);
-*/
-    /* Simulation: device ran out of energy? */
-    //if (energy > starting_energy) {
-   //   break;
-    //}
 
     printf("======= Application Running ==========\n");
     /************** Application Tasks ***************************/
-    if(NETSTACK_ROUTING.node_is_reachable() && NETSTACK_ROUTING.get_root_ipaddr(&dest_ipaddr)) {
-      printf("Sending request %u to server\n", count);
-      snprintf(str, sizeof(str), "hello %d", count);
-      //unsigned long time_before = to_milli_seconds(ENERGEST_GET_TOTAL_TIME());
-      //uip_udp_packet_sendto(conn, str, strlen(str), &dest_ipaddr, UIP_HTONS(UDP_SERVER_PORT));
-      //simple_udp_sendto(&udp_conn, str, strlen(str), &dest_ipaddr);
-      //unsigned long time_after = to_milli_seconds(ENERGEST_GET_TOTAL_TIME());
-      //printf("clock seconds: %lu\n", CLOCK_SECOND);
-      //printf("number of 10000th seconds transmitting: %lu\n", ((time_after - time_before) / 8) * 625);
-      //printf("before: %lu, after: %lu", time_before, time_after);
-
-      //NETSTACK_RADIO.off();
-      count++;
-    } else {
-      printf("Not reachable yet\n");
-    }
+    printf("Sending request %u to server\n", count);
+    snprintf(str, sizeof(str), "hello %d", count);
+    count++;
 
     update_energy(true);
     /* Simulation: device ran out of energy */
