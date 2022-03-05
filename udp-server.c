@@ -66,6 +66,7 @@ udp_rx_callback(struct simple_udp_connection *c,
 /*---------------------------------------------------------------------------*/
 PROCESS_THREAD(udp_server_process, ev, data)
 {
+  clock_init();
   PROCESS_BEGIN();
 
   /* Initialize DAG root */
