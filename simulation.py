@@ -1,14 +1,15 @@
 """
 usage: ./simulation.py <mitigate> <capacitor_max> <starting energy> <harvestable energy>
 """
+import sys
 
 send_interval = 10
 
-mitigate = bool(sys.argv[1])
-
+mitigate = int(sys.argv[1])
+print("mitigate is {}".format(mitigate))
 energy = float(sys.argv[3])  # uJ
 capacitor_max = float(sys.argv[2])
-critical_energy_level = 36.0
+capacitor_crit = float(sys.argv[5]) #36.0
 
 harvestable = float(sys.argv[4]) # uJ energy per second
 
@@ -27,16 +28,16 @@ fh = open("measurements.dat", 'a')
 def check_energy():
     global energy
     energy = min(capacitor_max, energy)
-    print("Time: {}\nPackets: {}".format(time, packets))
+#    print("Time: {}\nPackets: {}".format(time, packets))
     # check if ran out of energy
     if energy <= 0:
-        print("out of energy")
+#        print("out of energy")
         # TODO output to data file
         fh.write("{}\t{}\n".format(time,packets))
         fh.close()
         exit(0)
     if time > 600: # more than 10 minutes have passed
-        print("Exiting: runs for at least 10 minutes")
+ #       print("Exiting: runs for at least 10 minutes")
         fh.write("{}\t{}\n".format(600,packets))
         fh.close()
         exit(0)
@@ -54,17 +55,17 @@ def LPM(seconds):
 
 def AIMD():
     global off_seconds
-    if energy <= critical_energy_level:
+    if energy <= capacitor_crit:
         off_seconds *= 2
     elif off_seconds - delta > 0:
         off_seconds -= delta
     
 
-def trial(mitigate, capacitor_max, energy, harvestable): 
+def trial(): 
     # append parameters to data file
-    fh.write("{}\t{}\t{}\t{}\t".format(mitigate, capacitor_max, energy, harvestable))
     global energy
     global packets
+    fh.write("{}\t{}\t{}\t{}\t".format(mitigate, capacitor_max, energy, harvestable))
     while True:
         ##### SENSOR #####
 
@@ -95,4 +96,4 @@ def trial(mitigate, capacitor_max, energy, harvestable):
         packets += 1
         check_energy()
 
-trial(mitigate, capacitor_max, energy, harvestable)
+trial()
