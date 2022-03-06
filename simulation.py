@@ -6,14 +6,13 @@ import sys
 send_interval = 10
 
 mitigate = int(sys.argv[1])
-print("mitigate is {}".format(mitigate))
 energy = float(sys.argv[3])  # uJ
 capacitor_max = float(sys.argv[2])
 capacitor_crit = float(sys.argv[5]) #36.0
 
 harvestable = float(sys.argv[4]) # uJ energy per second
 
-off_seconds = 90
+off_seconds = 40
 delta = 1
 
 cpu_energy = 1.2 # amount of energy (mu amps) used by 1 cpu millisecond
@@ -23,22 +22,18 @@ sensor_reading_energy = 198.0 # uJoules per sensor reading
 time = 0
 packets = 0
 
-fh = open("measurements.dat", 'a')
+fh = open("measurements/{}-{}-{}.csv".format(mitigate, int(capacitor_max), int(energy)), 'a')
 
 def check_energy():
     global energy
     energy = min(capacitor_max, energy)
-#    print("Time: {}\nPackets: {}".format(time, packets))
     # check if ran out of energy
     if energy <= 0:
-#        print("out of energy")
-        # TODO output to data file
-        fh.write("{}\t{}\n".format(time,packets))
+        fh.write("{},{}\n".format(time,packets))
         fh.close()
         exit(0)
     if time > 600: # more than 10 minutes have passed
- #       print("Exiting: runs for at least 10 minutes")
-        fh.write("{}\t{}\n".format(600,packets))
+        fh.write("{},{}\n".format(600,packets))
         fh.close()
         exit(0)
         
@@ -65,7 +60,7 @@ def trial():
     # append parameters to data file
     global energy
     global packets
-    fh.write("{}\t{}\t{}\t{}\t".format(mitigate, capacitor_max, energy, harvestable))
+    fh.write("{},".format(harvestable))
     while True:
         ##### SENSOR #####
 
