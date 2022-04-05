@@ -12,8 +12,9 @@ capacitor_crit = float(sys.argv[5]) #36.0
 
 harvestable = float(sys.argv[4]) # uJ energy per second
 
+starting_off_seconds = 40
 off_seconds = 40
-delta = 1
+delta = 5
 
 cpu_energy = 1.2 # amount of energy (mu amps) used by 1 cpu millisecond
 radio_transmit_energy = 27.5 # amount of energy used by a radio per millisecond
@@ -22,7 +23,7 @@ sensor_reading_energy = 198.0 # uJoules per sensor reading
 time = 0
 packets = 0
 
-fh = open("measurements/{}-{}-{}.csv".format(mitigate, int(capacitor_max), int(energy)), 'a')
+fh = open("measurements/20QoSAIMD-{}-{}-{}.csv".format(mitigate, int(capacitor_max), int(energy)), 'a')
 
 def check_energy():
     global energy
@@ -32,7 +33,7 @@ def check_energy():
         fh.write("{},{}\n".format(time,packets))
         fh.close()
         exit(0)
-    if time > 600: # more than 10 minutes have passed
+    if time >= 600: # more than 10 minutes have passed
         fh.write("{},{}\n".format(600,packets))
         fh.close()
         exit(0)
@@ -52,8 +53,10 @@ def AIMD():
     global off_seconds
     if energy <= capacitor_crit:
         off_seconds *= 2
-    elif off_seconds - delta > 0:
+        off_seconds = min(off_seconds, starting_off_seconds)
+    else:
         off_seconds -= delta
+        off_seconds = max(0, off_seconds)
     
 
 def trial(): 
